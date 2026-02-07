@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart, Phone, MapPin, Clock } from "lucide-react";
+import { Heart, Phone, MapPin, Clock, Instagram } from "lucide-react";
 
 const CTASection = () => {
   const [formData, setFormData] = useState({
@@ -50,10 +50,10 @@ const CTASection = () => {
                 <div className="text-left">
                   <p className="text-cream/60 text-sm">Телефон</p>
                   <a
-                    href="tel:+79001234567"
+                    href="tel:+79819384324"
                     className="text-cream font-medium hover:text-gold transition-colors"
                   >
-                    +7 (900) 123-45-67
+                    +7 (981) 938-43-24
                   </a>
                 </div>
               </div>
@@ -77,6 +77,23 @@ const CTASection = () => {
                 <div className="text-left">
                   <p className="text-cream/60 text-sm">Время работы</p>
                   <p className="text-cream font-medium">Ежедневно 9:00 – 21:00</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 justify-center lg:justify-start">
+                <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center">
+                  <Instagram className="w-5 h-5 text-gold" />
+                </div>
+                <div className="text-left">
+                  <p className="text-cream/60 text-sm">Instagram</p>
+                  <a
+                    href="https://www.instagram.com/_valerie_bakery"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cream font-medium hover:text-gold transition-colors"
+                  >
+                    @_valerie_bakery
+                  </a>
                 </div>
               </div>
             </div>
