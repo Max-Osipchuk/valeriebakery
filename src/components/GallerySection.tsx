@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import heroImage from "@/assets/hero-cake.jpg";
-import cakeChocolate from "@/assets/cake-chocolate.jpg";
-import cakeBerry from "@/assets/cake-berry.jpg";
-import cakeMango from "@/assets/cake-mango.jpg";
-import cupcakes from "@/assets/cupcakes.jpg";
-import bentoCake from "@/assets/bento-cake.jpg";
+import gallery1 from "@/assets/gallery-1.jpg";
+import gallery2 from "@/assets/gallery-2.jpg";
+import gallery3 from "@/assets/gallery-3.jpg";
+import gallery4 from "@/assets/gallery-4.jpg";
+import gallery5 from "@/assets/gallery-5.jpg";
+import gallery6 from "@/assets/gallery-6.jpg";
 
 const galleryImages = [
-  { src: heroImage, alt: "Свадебный торт с ягодами", span: "col-span-2 row-span-2" },
-  { src: cakeChocolate, alt: "Шоколадный торт", span: "" },
-  { src: cakeBerry, alt: "Ягодный торт", span: "" },
-  { src: cakeMango, alt: "Манго торт", span: "col-span-2" },
-  { src: cupcakes, alt: "Капкейки", span: "" },
-  { src: bentoCake, alt: "Бенто торт", span: "" },
+  { src: gallery1, alt: "Торт на полгодика с зайкой", span: "col-span-1 row-span-1" },
+  { src: gallery2, alt: "Чёрный торт на 30-летие с золотым декором", span: "col-span-1 row-span-1" },
+  { src: gallery3, alt: "Торт с капкейками на день рождения", span: "col-span-2 row-span-1" },
+  { src: gallery4, alt: "Голубой торт с цветами", span: "col-span-1 row-span-1" },
+  { src: gallery5, alt: "Бенто-торт с динозаврами", span: "col-span-1 row-span-1" },
+  { src: gallery6, alt: "Двухъярусный торт для музыкальной студии", span: "col-span-2 row-span-1" },
 ];
 
 const GallerySection = () => {
