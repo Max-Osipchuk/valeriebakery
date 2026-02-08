@@ -133,6 +133,10 @@
   }
 }
 
+#lovable-badge {
+  display: none !important;
+}
+
 @layer utilities {
   .animate-fade-up {
     animation: fadeUp 0.6s ease-out forwards;
