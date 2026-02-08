@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart, Phone, MapPin, Clock, Instagram } from "lucide-react";
+import { Heart, Phone, MapPin, Clock, Instagram, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const CTASection = () => {
   const [formData, setFormData] = useState({
@@ -9,15 +11,39 @@ const CTASection = () => {
     comment: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", phone: "", comment: "" });
-    }, 3000);
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('send-telegram', {
+        body: {
+          name: formData.name,
+          phone: formData.phone,
+          comment: formData.comment,
+        },
+      });
+
+      if (error) {
+        console.error('Error sending request:', error);
+        toast.error('Ошибка отправки. Попробуйте позвонить нам напрямую.');
+        return;
+      }
+
+      console.log('Request sent successfully:', data);
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: "", phone: "", comment: "" });
+      }, 3000);
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Ошибка отправки. Попробуйте позже.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -154,8 +180,15 @@ const CTASection = () => {
                     className="w-full px-5 py-4 bg-cream/10 rounded-xl border border-cream/20 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-cream placeholder:text-cream/50 resize-none"
                   />
                 </div>
-                <Button type="submit" variant="hero" size="xl" className="w-full">
-                  Оставить заявку
+                <Button type="submit" variant="hero" size="xl" className="w-full" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      Отправка...
+                    </>
+                  ) : (
+                    'Оставить заявку'
+                  )}
                 </Button>
               </form>
             )}
