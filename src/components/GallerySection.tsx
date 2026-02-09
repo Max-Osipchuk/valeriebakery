@@ -6,6 +6,14 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
+import gallery7 from "@/assets/gallery-7.jpg";
+import gallery8 from "@/assets/gallery-8.jpg";
+import gallery9 from "@/assets/gallery-9.jpg";
+import gallery10 from "@/assets/gallery-10.jpg";
+import gallery11 from "@/assets/gallery-11.jpg";
+import gallery12 from "@/assets/gallery-12.jpg";
+import gallery13 from "@/assets/gallery-13.jpg";
+import gallery14 from "@/assets/gallery-14.jpg";
 
 const galleryImages = [
   { src: gallery1, alt: "Торт на полгодика с зайкой", span: "col-span-1 row-span-1" },
@@ -14,6 +22,14 @@ const galleryImages = [
   { src: gallery4, alt: "Голубой торт с цветами", span: "col-span-1 row-span-1" },
   { src: gallery5, alt: "Бенто-торт с динозаврами", span: "col-span-1 row-span-1" },
   { src: gallery6, alt: "Двухъярусный торт для музыкальной студии", span: "col-span-2 row-span-1" },
+  { src: gallery7, alt: "Серый торт с горами — Ты покоришь любые вершины", span: "col-span-1 row-span-1" },
+  { src: gallery8, alt: "Торт с домиком и ягодами на юбилей", span: "col-span-1 row-span-1" },
+  { src: gallery9, alt: "Двухъярусный торт с сухоцветами", span: "col-span-2 row-span-1" },
+  { src: gallery10, alt: "Капкейки мятного и бежевого цвета в коробке", span: "col-span-1 row-span-1" },
+  { src: gallery11, alt: "Белый торт с клубникой и малиной", span: "col-span-1 row-span-1" },
+  { src: gallery12, alt: "Розовый торт с цветами и ягодами", span: "col-span-1 row-span-1" },
+  { src: gallery13, alt: "Чёрный торт с золотым львом", span: "col-span-1 row-span-1" },
+  { src: gallery14, alt: "Персиковый торт с розами и эвкалиптом", span: "col-span-2 row-span-1" },
 ];
 
 const GallerySection = () => {

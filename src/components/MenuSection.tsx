@@ -6,36 +6,65 @@ import cakeMango from "@/assets/cake-mango.jpg";
 import cupcakes from "@/assets/cupcakes.jpg";
 import bentoCake from "@/assets/bento-cake.jpg";
 
+interface FlavorItem {
+  name: string;
+  description: string;
+}
+
+interface PriceItem {
+  name: string;
+  price: string;
+}
+
 interface MenuCategory {
   id: string;
   title: string;
   price: string;
   minWeight?: string;
   image: string;
-  flavors?: string[];
-  items?: { name: string; price: string }[];
+  flavors?: FlavorItem[];
+  items?: PriceItem[];
+  options?: { label: string; values: string[] }[];
 }
 
 const menuData: MenuCategory[] = [
   {
-    id: "biscuit",
+    id: "biscuit1",
     title: "Бисквитные торты",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
     image: cakeBerry,
     flavors: [
-      "Рафаэлло — кокосовые бисквиты, крем, малиновый конфитюр",
-      "Манго-маракуйя — кокосовые бисквиты, манговый крем, конфитюр маракуйя",
-      "Мятный — ванильные бисквиты, мятный крем, белый шоколад",
-      "Клубника со сливками — ванильные бисквиты, сливочный крем, клубничный конфитюр",
-      "Миндаль-банан",
-      "Ягода-малина",
-      "Фисташка-малина",
-      "Красный бархат",
-      "Сникерс",
-      "Морковный",
-      "Шоколадная вишня",
-      "Карамельная груша",
+      { name: "Рафаэлло", description: "Кокосовые бисквиты и крем, начинка из малинового конфитюра" },
+      { name: "Манго Маракуйя", description: "Кокосовые бисквиты, манговый крем и 2 начинки: маракуйевый конфитюр и манговый чизкейк" },
+      { name: "Мятный", description: "Ванильные бисквиты, мятный крем и 2 начинки из мятного мусса и белого шоколада в сливках" },
+      { name: "Клубника со сливками", description: "Ванильные бисквиты, сливочный крем и 2 начинки из клубничного конфитюра и клубничного мусса" },
+    ],
+  },
+  {
+    id: "biscuit2",
+    title: "Бисквитные торты",
+    price: "2 200₽/кг",
+    minWeight: "от 1.5 кг",
+    image: cakeMango,
+    flavors: [
+      { name: "Миндаль банан", description: "Миндальные бисквиты и крем, начинка из карамелизированного банана" },
+      { name: "Ягода малина", description: "Малиновые бисквиты и крем, начинка из малинового конфитюра, посыпанного маршмеллоу" },
+      { name: "Фисташка малина", description: "Фисташковые бисквиты и крем, начинка из малинового конфитюра" },
+      { name: "Красный бархат", description: "Бисквиты красный бархат, ванильный крем и начинка из вишневого конфитюра" },
+    ],
+  },
+  {
+    id: "biscuit3",
+    title: "Бисквитные торты",
+    price: "2 200₽/кг",
+    minWeight: "от 1.5 кг",
+    image: cakeChocolate,
+    flavors: [
+      { name: "Сникерс", description: "Шоколадные бисквиты, ванильный крем и начинка из арахиса, политого солёной карамелью" },
+      { name: "Морковный", description: "Морковные бисквиты, ванильный крем и 2 начинки из солёной карамели и ванильного чизкейка" },
+      { name: "Шоколадная вишня", description: "Шоколадные бисквиты и крем, начинка из вишневого конфитюра" },
+      { name: "Карамельная груша", description: "Карамельные бисквиты, ванильный крем и начинка из жареной груши, политой солёной карамелью" },
     ],
   },
   {
@@ -45,10 +74,10 @@ const menuData: MenuCategory[] = [
     minWeight: "от 1.5 кг",
     image: cakeMango,
     flavors: [
-      "Кленовая тыква",
-      "Арахисовый",
-      "Яблочный пирог",
-      "Шоколадный апельсин",
+      { name: "Кленовая тыква", description: "Тыквенные бисквиты, кленовый крем и начинка из солёной карамели" },
+      { name: "Арахисовый", description: "Арахисовые бисквиты и крем, начинка из арахиса, политого солёной карамелью" },
+      { name: "Яблочный пирог", description: "Пряные бисквиты с добавлением специй (корица, мускат, имбирь), ванильный крем и начинка из жареных яблок, политых солёной карамелью" },
+      { name: "Шоколадный апельсин", description: "Шоколадные бисквиты и крем, начинка из апельсинового конфитюра" },
     ],
   },
   {
@@ -57,7 +86,10 @@ const menuData: MenuCategory[] = [
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
     image: cakeChocolate,
-    flavors: ["Медовик", "Молочная девочка"],
+    flavors: [
+      { name: "Медовик", description: "Медовые коржи и ванильно-сметанный крем" },
+      { name: "Молочная девочка", description: "Бисквиты с добавлением сгущённого молока, ванильный крем и начинка из малинового конфитюра" },
+    ],
   },
   {
     id: "cupcakes",
@@ -69,18 +101,42 @@ const menuData: MenuCategory[] = [
       { name: "10 шт", price: "3 600₽" },
       { name: "12 шт", price: "4 700₽" },
     ],
+    options: [
+      { label: "Бисквит", values: ["ваниль", "шоколад", "красный бархат", "миндаль", "мак", "кокос"] },
+      { label: "Крем", values: ["ваниль", "шоколад"] },
+      { label: "Начинка", values: [
+        "ягодный конфитюр (малина, клубника, черника, вишня)",
+        "фруктовый конфитюр (манго, маракуйя, яблоки с корицей, апельсин с корицей, груша, лимон)",
+        "солёная карамель",
+        "солёная карамель с арахисом или миндалём",
+        "заварной ванильный крем",
+        "белый шоколад в сливках",
+      ]},
+    ],
   },
   {
     id: "bento",
-    title: "Бенто-торты",
+    title: "Бенто-торт",
     price: "1 750₽",
     image: bentoCake,
-    flavors: ["Любая начинка на ваш выбор", "~500 г"],
+    items: [{ name: "~500 гр", price: "1 750₽" }],
+    options: [
+      { label: "Бисквит", values: ["ваниль", "шоколад", "красный бархат", "миндаль", "мак", "кокос"] },
+      { label: "Начинка", values: [
+        "ягодный конфитюр (малина, клубника, черника, вишня)",
+        "фруктовый конфитюр (манго, маракуйя, яблоки с корицей, апельсин с корицей, груша, лимон)",
+        "солёная карамель",
+        "солёная карамель с арахисом или миндалём",
+        "заварной ванильный крем",
+        "белый шоколад в сливках",
+      ]},
+      { label: "Крем", values: ["ваниль", "шоколад", "манго", "кокос", "миндаль"] },
+    ],
   },
 ];
 
 const MenuSection = () => {
-  const [expandedId, setExpandedId] = useState<string | null>("biscuit");
+  const [expandedId, setExpandedId] = useState<string | null>("biscuit1");
 
   return (
     <section id="menu" className="py-20 md:py-32 bg-cream">
@@ -143,7 +199,7 @@ const MenuSection = () => {
                   <span className="font-medium">
                     {category.flavors
                       ? `${category.flavors.length} вкусов`
-                      : `${category.items?.length} варианта`}
+                      : "Подробнее"}
                   </span>
                   <ChevronDown
                     className={`w-5 h-5 transition-transform duration-300 ${
@@ -155,18 +211,18 @@ const MenuSection = () => {
                 <div
                   className={`overflow-hidden transition-all duration-500 ${
                     expandedId === category.id
-                      ? "max-h-[500px] mt-4"
+                      ? "max-h-[800px] mt-4"
                       : "max-h-0"
                   }`}
                 >
-                  <div className="space-y-2 pt-4 border-t border-border">
+                  <div className="space-y-3 pt-4 border-t border-border">
                     {category.flavors?.map((flavor, i) => (
-                      <p
-                        key={i}
-                        className="text-sm text-muted-foreground leading-relaxed"
-                      >
-                        • {flavor}
-                      </p>
+                      <div key={i} className="text-sm">
+                        <span className="font-semibold text-chocolate">{flavor.name}</span>
+                        <p className="text-muted-foreground leading-relaxed mt-0.5">
+                          {flavor.description}
+                        </p>
+                      </div>
                     ))}
                     {category.items?.map((item, i) => (
                       <div
@@ -179,6 +235,14 @@ const MenuSection = () => {
                         <span className="text-chocolate font-medium">
                           {item.price}
                         </span>
+                      </div>
+                    ))}
+                    {category.options?.map((option, i) => (
+                      <div key={i} className="text-sm mt-2">
+                        <span className="font-semibold text-chocolate">{option.label}:</span>
+                        <p className="text-muted-foreground leading-relaxed mt-0.5">
+                          {option.values.join(", ")}
+                        </p>
                       </div>
                     ))}
                   </div>
