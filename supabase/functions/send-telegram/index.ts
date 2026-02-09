@@ -8,6 +8,8 @@ const corsHeaders = {
 interface TelegramRequest {
   name: string;
   phone: string;
+  social?: string;
+  delivery?: string;
   comment?: string;
 }
 
@@ -29,7 +31,7 @@ serve(async (req) => {
       );
     }
 
-    const { name, phone, comment } = await req.json() as TelegramRequest;
+    const { name, phone, social, delivery, comment } = await req.json() as TelegramRequest;
 
     if (!name || !phone) {
       return new Response(
@@ -38,16 +40,21 @@ serve(async (req) => {
       );
     }
 
+    // Format delivery method
+    const deliveryText = delivery === 'pickup' ? '🏠 Самовывоз' : delivery === 'yandex' ? '🚗 Яндекс Доставка' : '';
+
     // Format message for Telegram
     const message = `🎂 *Новая заявка с сайта Valerie Bakery*
 
 👤 *Имя:* ${name}
 📞 *Телефон:* ${phone}
+${social ? `📱 *Соцсеть:* ${social}` : ''}
+${deliveryText ? `📦 *Доставка:* ${deliveryText}` : ''}
 ${comment ? `💬 *Комментарий:* ${comment}` : ''}
 
 📅 _${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}_`;
 
-    console.log('Sending message to Telegram:', { name, phone, hasComment: !!comment });
+    console.log('Sending message to Telegram:', { name, phone, social, delivery, hasComment: !!comment });
 
     // Send message to Telegram
     const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;

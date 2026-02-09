@@ -8,6 +8,8 @@ const CTASection = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    social: "",
+    delivery: "pickup" as "pickup" | "yandex",
     comment: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -22,6 +24,8 @@ const CTASection = () => {
         body: {
           name: formData.name,
           phone: formData.phone,
+          social: formData.social,
+          delivery: formData.delivery,
           comment: formData.comment,
         },
       });
@@ -36,7 +40,7 @@ const CTASection = () => {
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({ name: "", phone: "", comment: "" });
+        setFormData({ name: "", phone: "", social: "", delivery: "pickup", comment: "" });
       }, 3000);
     } catch (error) {
       console.error('Error:', error);
@@ -168,6 +172,41 @@ const CTASection = () => {
                     }
                     className="w-full px-5 py-4 bg-cream/10 rounded-xl border border-cream/20 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-cream placeholder:text-cream/50"
                   />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Telegram (@username) или Instagram"
+                    value={formData.social}
+                    onChange={(e) =>
+                      setFormData({ ...formData, social: e.target.value })
+                    }
+                    className="w-full px-5 py-4 bg-cream/10 rounded-xl border border-cream/20 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-cream placeholder:text-cream/50"
+                  />
+                </div>
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, delivery: "pickup" })}
+                    className={`flex-1 px-4 py-3 rounded-xl border transition-all duration-300 text-sm font-medium ${
+                      formData.delivery === "pickup"
+                        ? "bg-gold text-chocolate border-gold"
+                        : "bg-cream/10 border-cream/20 text-cream/70 hover:border-gold/50"
+                    }`}
+                  >
+                    🏠 Самовывоз
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, delivery: "yandex" })}
+                    className={`flex-1 px-4 py-3 rounded-xl border transition-all duration-300 text-sm font-medium ${
+                      formData.delivery === "yandex"
+                        ? "bg-gold text-chocolate border-gold"
+                        : "bg-cream/10 border-cream/20 text-cream/70 hover:border-gold/50"
+                    }`}
+                  >
+                    🚗 Яндекс Доставка
+                  </button>
                 </div>
                 <div>
                   <textarea
