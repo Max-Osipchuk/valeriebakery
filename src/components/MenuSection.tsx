@@ -5,6 +5,8 @@ import cakeBerry from "@/assets/cake-berry.jpg";
 import cakeMango from "@/assets/cake-mango.jpg";
 import cupcakes from "@/assets/cupcakes.jpg";
 import bentoCake from "@/assets/bento-cake.jpg";
+import gallery9 from "@/assets/gallery-9.jpg";
+import gallery11 from "@/assets/gallery-11.jpg";
 
 interface FlavorItem {
   name: string;
@@ -72,7 +74,7 @@ const menuData: MenuCategory[] = [
     title: "Сезонные торты",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
-    image: cakeMango,
+    image: gallery9,
     flavors: [
       { name: "Кленовая тыква", description: "Тыквенные бисквиты, кленовый крем и начинка из солёной карамели" },
       { name: "Арахисовый", description: "Арахисовые бисквиты и крем, начинка из арахиса, политого солёной карамелью" },
@@ -85,7 +87,7 @@ const menuData: MenuCategory[] = [
     title: "Классические торты",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
-    image: cakeChocolate,
+    image: gallery11,
     flavors: [
       { name: "Медовик", description: "Медовые коржи и ванильно-сметанный крем" },
       { name: "Молочная девочка", description: "Бисквиты с добавлением сгущённого молока, ванильный крем и начинка из малинового конфитюра" },
