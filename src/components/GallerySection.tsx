@@ -14,6 +14,11 @@ import gallery11 from "@/assets/gallery-11.jpg";
 import gallery12 from "@/assets/gallery-12.jpg";
 import gallery13 from "@/assets/gallery-13.jpg";
 import gallery14 from "@/assets/gallery-14.jpg";
+import gallery15 from "@/assets/gallery-15.jpg";
+import gallery16 from "@/assets/gallery-16.jpg";
+import gallery17 from "@/assets/gallery-17.jpg";
+import gallery18 from "@/assets/gallery-18.jpg";
+import gallery19 from "@/assets/gallery-19.jpg";
 
 const galleryImages = [
   { src: gallery1, alt: "Торт на полгодика с зайкой", span: "col-span-1 row-span-1" },
@@ -30,6 +35,11 @@ const galleryImages = [
   { src: gallery12, alt: "Розовый торт с цветами и ягодами", span: "col-span-1 row-span-1" },
   { src: gallery13, alt: "Чёрный торт с золотым львом", span: "col-span-1 row-span-1" },
   { src: gallery14, alt: "Персиковый торт с розами и эвкалиптом", span: "col-span-2 row-span-1" },
+  { src: gallery15, alt: "Персиковый торт с цветами", span: "col-span-1 row-span-1" },
+  { src: gallery16, alt: "Белый торт с малиной и лавандой", span: "col-span-1 row-span-1" },
+  { src: gallery17, alt: "Фисташковый торт с ягодами", span: "col-span-2 row-span-1" },
+  { src: gallery18, alt: "Капкейки с мишками и погремушками", span: "col-span-1 row-span-1" },
+  { src: gallery19, alt: "Бенто-торт Happy Birthday с бантиками", span: "col-span-1 row-span-1" },
 ];
 
 const GallerySection = () => {
