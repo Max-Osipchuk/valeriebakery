@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, Phone, MapPin, Clock, Instagram, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { normalizeOrderFormData, orderFieldLimits, validateOrderFormData } from "@/lib/orderValidation";
 
 const CTASection = () => {
   const [formData, setFormData] = useState({
@@ -17,17 +18,20 @@ const CTASection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const normalizedData = normalizeOrderFormData(formData);
+    const validationError = validateOrderFormData(normalizedData);
+
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-telegram', {
-        body: {
-          name: formData.name,
-          phone: formData.phone,
-          social: formData.social,
-          delivery: formData.delivery,
-          comment: formData.comment,
-        },
+      const { error } = await supabase.functions.invoke('send-telegram', {
+        body: normalizedData,
       });
 
       if (error) {
@@ -36,7 +40,6 @@ const CTASection = () => {
         return;
       }
 
-      console.log('Request sent successfully:', data);
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
@@ -154,6 +157,7 @@ const CTASection = () => {
                     type="text"
                     placeholder="Ваше имя"
                     required
+                    maxLength={orderFieldLimits.name}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -166,6 +170,7 @@ const CTASection = () => {
                     type="tel"
                     placeholder="Телефон"
                     required
+                    maxLength={orderFieldLimits.phone}
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
@@ -177,6 +182,7 @@ const CTASection = () => {
                   <input
                     type="text"
                     placeholder="Telegram (@username) или Instagram"
+                    maxLength={orderFieldLimits.social}
                     value={formData.social}
                     onChange={(e) =>
                       setFormData({ ...formData, social: e.target.value })
@@ -212,6 +218,7 @@ const CTASection = () => {
                   <textarea
                     placeholder="Опишите ваш торт мечты..."
                     rows={4}
+                    maxLength={orderFieldLimits.comment}
                     value={formData.comment}
                     onChange={(e) =>
                       setFormData({ ...formData, comment: e.target.value })
