@@ -157,6 +157,7 @@ const CTASection = () => {
                     type="text"
                     placeholder="Ваше имя"
                     required
+                    maxLength={orderFieldLimits.name}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -169,6 +170,7 @@ const CTASection = () => {
                     type="tel"
                     placeholder="Телефон"
                     required
+                    maxLength={orderFieldLimits.phone}
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
@@ -180,6 +182,7 @@ const CTASection = () => {
                   <input
                     type="text"
                     placeholder="Telegram (@username) или Instagram"
+                    maxLength={orderFieldLimits.social}
                     value={formData.social}
                     onChange={(e) =>
                       setFormData({ ...formData, social: e.target.value })
@@ -215,6 +218,7 @@ const CTASection = () => {
                   <textarea
                     placeholder="Опишите ваш торт мечты..."
                     rows={4}
+                    maxLength={orderFieldLimits.comment}
                     value={formData.comment}
                     onChange={(e) =>
                       setFormData({ ...formData, comment: e.target.value })
