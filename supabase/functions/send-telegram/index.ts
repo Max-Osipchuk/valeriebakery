@@ -1,94 +1,156 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+const allowedOrigins = new Set([
+  "https://valeriebakery.ru",
+  "https://www.valeriebakery.ru",
+  "https://valeriebakery.lovable.app",
+  "https://id-preview--1c136435-14e5-41ff-a327-b07ec97b2e95.lovable.app",
+]);
+
+const getCorsHeaders = (origin: string | null) => {
+  const allowOrigin = origin && allowedOrigins.has(origin) ? origin : "https://valeriebakery.ru";
+
+  return {
+    "Access-Control-Allow-Origin": allowOrigin,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Vary": "Origin",
+  };
 };
 
 interface TelegramRequest {
   name: string;
   phone: string;
   social?: string;
-  delivery?: string;
+  delivery?: "pickup" | "yandex";
   comment?: string;
 }
 
+const LIMITS = {
+  name: 100,
+  phone: 30,
+  social: 100,
+  comment: 500,
+} as const;
+
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;");
+
+const normalizeText = (value: unknown, maxLength: number) => {
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim().replace(/[\u0000-\u001F\u007F]/g, " ").replace(/\s+/g, " ");
+  if (trimmed.length > maxLength) return null;
+  return trimmed;
+};
+
+const validatePayload = (payload: unknown): TelegramRequest | null => {
+  if (!payload || typeof payload !== "object") return null;
+
+  const data = payload as Record<string, unknown>;
+  const name = normalizeText(data.name, LIMITS.name);
+  const phone = normalizeText(data.phone, LIMITS.phone);
+  const social = normalizeText(data.social ?? "", LIMITS.social) ?? "";
+  const comment = normalizeText(data.comment ?? "", LIMITS.comment) ?? "";
+  const delivery = data.delivery === "pickup" || data.delivery === "yandex" ? data.delivery : null;
+
+  if (!name || !phone || !delivery) return null;
+
+  return { name, phone, social, delivery, comment };
+};
+
 serve(async (req) => {
-  // Handle CORS preflight requests
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+  const corsHeaders = getCorsHeaders(req.headers.get("Origin"));
+
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+
+  if (req.method !== "POST") {
+    return new Response(
+      JSON.stringify({ error: "Method not allowed" }),
+      { status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   }
 
   try {
-    const TELEGRAM_BOT_TOKEN = Deno.env.get('TELEGRAM_BOT_TOKEN');
-    const TELEGRAM_CHAT_ID = Deno.env.get('TELEGRAM_CHAT_ID');
+    const TELEGRAM_BOT_TOKEN = Deno.env.get("TELEGRAM_BOT_TOKEN");
+    const TELEGRAM_CHAT_ID = Deno.env.get("TELEGRAM_CHAT_ID");
 
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-      console.error('Missing Telegram configuration');
+      console.error("Missing Telegram configuration");
       return new Response(
-        JSON.stringify({ error: 'Telegram not configured' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: "Service temporarily unavailable" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    const { name, phone, social, delivery, comment } = await req.json() as TelegramRequest;
-
-    if (!name || !phone) {
+    let payload: unknown;
+    try {
+      payload = await req.json();
+    } catch {
       return new Response(
-        JSON.stringify({ error: 'Name and phone are required' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: "Invalid request body" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // Format delivery method
-    const deliveryText = delivery === 'pickup' ? '🏠 Самовывоз' : delivery === 'yandex' ? '🚗 Яндекс Доставка' : '';
+    const validated = validatePayload(payload);
 
-    // Format message for Telegram
-    const message = `🎂 *Новая заявка с сайта Valerie Bakery*
+    if (!validated) {
+      return new Response(
+        JSON.stringify({ error: "Invalid request data" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
-👤 *Имя:* ${name}
-📞 *Телефон:* ${phone}
-${social ? `📱 *Соцсеть:* ${social}` : ''}
-${deliveryText ? `📦 *Доставка:* ${deliveryText}` : ''}
-${comment ? `💬 *Комментарий:* ${comment}` : ''}
+    const { name, phone, social, delivery, comment } = validated;
+    const deliveryText = delivery === "pickup" ? "🏠 Самовывоз" : "🚗 Яндекс Доставка";
 
-📅 _${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}_`;
+    const message = `🎂 <b>Новая заявка с сайта Valerie Bakery</b>
 
-    console.log('Sending message to Telegram:', { name, phone, social, delivery, hasComment: !!comment });
+👤 <b>Имя:</b> ${escapeHtml(name)}
+📞 <b>Телефон:</b> ${escapeHtml(phone)}
+${social ? `📱 <b>Соцсеть:</b> ${escapeHtml(social)}` : ""}
+${deliveryText ? `📦 <b>Доставка:</b> ${deliveryText}` : ""}
+${comment ? `💬 <b>Комментарий:</b> ${escapeHtml(comment)}` : ""}
 
-    // Send message to Telegram
+📅 <i>${new Date().toLocaleString("ru-RU", { timeZone: "Europe/Moscow" })}</i>`;
+
     const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     const telegramResponse = await fetch(telegramUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: message,
-        parse_mode: 'Markdown',
+        parse_mode: "HTML",
       }),
     });
 
-    const telegramResult = await telegramResponse.json();
-    console.log('Telegram API response:', telegramResult);
-
     if (!telegramResponse.ok) {
-      console.error('Telegram API error:', telegramResult);
+      const errorText = await telegramResponse.text();
+      console.error("Telegram API error", { status: telegramResponse.status, bodyLength: errorText.length });
       return new Response(
-        JSON.stringify({ error: 'Failed to send message to Telegram' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: "Failed to send request" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    return new Response(
-      JSON.stringify({ success: true, message: 'Request sent successfully' }),
-      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    );
+    await telegramResponse.text();
 
-  } catch (error) {
-    console.error('Error in send-telegram function:', error);
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      JSON.stringify({ success: true, message: "Request sent successfully" }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  } catch (error) {
+    console.error("Error in send-telegram function:", error instanceof Error ? error.message : "Unknown error");
+    return new Response(
+      JSON.stringify({ error: "Internal server error" }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });
