@@ -4,6 +4,7 @@ import { Sparkles, Heart, Palette, Loader2 } from "lucide-react";
 import heroImage from "@/assets/hero-cake.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { normalizeOrderFormData, orderFieldLimits, validateOrderFormData } from "@/lib/orderValidation";
 
 const HeroSection = () => {
   const [formData, setFormData] = useState({
@@ -18,17 +19,20 @@ const HeroSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const normalizedData = normalizeOrderFormData(formData);
+    const validationError = validateOrderFormData(normalizedData);
+
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-telegram', {
-        body: {
-          name: formData.name,
-          phone: formData.phone,
-          social: formData.social,
-          delivery: formData.delivery,
-          comment: formData.comment,
-        },
+      const { error } = await supabase.functions.invoke('send-telegram', {
+        body: normalizedData,
       });
 
       if (error) {
@@ -37,7 +41,6 @@ const HeroSection = () => {
         return;
       }
 
-      console.log('Request sent successfully:', data);
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
