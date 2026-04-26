@@ -155,6 +155,7 @@ const HeroSection = () => {
                       type="text"
                       placeholder="Ваше имя"
                       required
+                      maxLength={orderFieldLimits.name}
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -167,6 +168,7 @@ const HeroSection = () => {
                       type="tel"
                       placeholder="Телефон"
                       required
+                      maxLength={orderFieldLimits.phone}
                       value={formData.phone}
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
@@ -178,6 +180,7 @@ const HeroSection = () => {
                     <input
                       type="text"
                       placeholder="Telegram (@username) или Instagram"
+                      maxLength={orderFieldLimits.social}
                       value={formData.social}
                       onChange={(e) =>
                         setFormData({ ...formData, social: e.target.value })
@@ -213,6 +216,7 @@ const HeroSection = () => {
                     <textarea
                       placeholder="Комментарий к заказу (дата, пожелания к декору)"
                       rows={3}
+                      maxLength={orderFieldLimits.comment}
                       value={formData.comment}
                       onChange={(e) =>
                         setFormData({ ...formData, comment: e.target.value })
