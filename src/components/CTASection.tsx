@@ -18,6 +18,11 @@ const CTASection = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const isSubmitReady = Boolean(
+    formData.phone.trim() &&
+      (formData.email.trim() || formData.social.trim()) &&
+      formData.privacyConsent
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -181,6 +186,9 @@ const CTASection = () => {
                     className="w-full px-5 py-4 bg-cream/10 rounded-xl border border-cream/20 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-cream placeholder:text-cream/50"
                   />
                 </div>
+                <p className="text-sm text-cream/55">
+                  Укажите хотя бы один способ связи: email или мессенджер
+                </p>
                 <div>
                   <input
                     type="text"
@@ -272,8 +280,8 @@ const CTASection = () => {
                   type="submit"
                   variant="hero"
                   size="xl"
-                  aria-disabled={!formData.privacyConsent || isLoading}
-                  className={`w-full ${!formData.privacyConsent ? "bg-muted text-muted-foreground shadow-none hover:scale-100 hover:shadow-none" : ""}`}
+                  aria-disabled={!isSubmitReady || isLoading}
+                  className={`w-full ${!isSubmitReady ? "bg-muted text-muted-foreground shadow-none hover:scale-100 hover:shadow-none" : ""}`}
                   disabled={isLoading}
                 >
                   {isLoading ? (
