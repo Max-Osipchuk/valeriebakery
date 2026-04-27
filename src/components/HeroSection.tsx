@@ -202,7 +202,7 @@ const HeroSection = () => {
                   <div>
                     <input
                       type="email"
-                      placeholder="Email (необязательно)"
+                      placeholder="Email"
                       maxLength={orderFieldLimits.email}
                       value={formData.email}
                       onChange={(e) =>
