@@ -11,6 +11,9 @@ const HeroSection = () => {
     name: "",
     phone: "",
     social: "",
+    email: "",
+    marketingConsent: false,
+    privacyConsent: false,
     delivery: "pickup" as "pickup" | "yandex",
     comment: "",
   });
@@ -44,7 +47,7 @@ const HeroSection = () => {
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({ name: "", phone: "", social: "", delivery: "pickup", comment: "" });
+        setFormData({ name: "", phone: "", social: "", email: "", marketingConsent: false, privacyConsent: false, delivery: "pickup", comment: "" });
       }, 3000);
     } catch (error) {
       console.error('Error:', error);
@@ -188,6 +191,31 @@ const HeroSection = () => {
                       className="w-full px-5 py-4 bg-cream rounded-xl border border-border focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-chocolate placeholder:text-muted-foreground"
                     />
                   </div>
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Email (необязательно)"
+                      maxLength={orderFieldLimits.email}
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value, marketingConsent: e.target.value.trim() ? formData.marketingConsent : false })
+                      }
+                      className="w-full px-5 py-4 bg-cream rounded-xl border border-border focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-chocolate placeholder:text-muted-foreground"
+                    />
+                  </div>
+                  <label
+                    title={!formData.email.trim() ? "Укажите email чтобы подписаться" : undefined}
+                    className={`flex items-start gap-3 text-sm transition-colors ${formData.email.trim() ? "text-chocolate-light" : "text-muted-foreground"}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={formData.marketingConsent}
+                      disabled={!formData.email.trim()}
+                      onChange={(e) => setFormData({ ...formData, marketingConsent: e.target.checked })}
+                      className="mt-0.5 h-4 w-4 rounded border-border accent-gold disabled:cursor-not-allowed disabled:opacity-40"
+                    />
+                    <span>Хочу получать скидки и узнавать о новинках и акциях</span>
+                  </label>
                   <div className="flex gap-3">
                     <button
                       type="button"
@@ -224,7 +252,21 @@ const HeroSection = () => {
                       className="w-full px-5 py-4 bg-cream rounded-xl border border-border focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-chocolate placeholder:text-muted-foreground resize-none"
                     />
                   </div>
-                  <Button type="submit" variant="hero" size="xl" className="w-full" disabled={isLoading}>
+                  <label className="flex items-start gap-3 text-xs leading-relaxed text-chocolate-light/75">
+                    <input
+                      type="checkbox"
+                      checked={formData.privacyConsent}
+                      onChange={(e) => setFormData({ ...formData, privacyConsent: e.target.checked })}
+                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-border accent-gold"
+                    />
+                    <span>
+                      Я согласен(на) на обработку моих персональных данных в соответствии с{" "}
+                      <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
+                        Политикой конфиденциальности
+                      </a>
+                    </span>
+                  </label>
+                  <Button type="submit" variant="hero" size="xl" className="w-full disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none" disabled={isLoading || !formData.privacyConsent}>
                     {isLoading ? (
                       <>
                         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
