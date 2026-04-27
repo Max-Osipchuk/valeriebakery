@@ -63,6 +63,7 @@ const validatePayload = (payload: unknown): TelegramRequest | null => {
   const delivery = data.delivery === "pickup" || data.delivery === "yandex" ? data.delivery : null;
 
   if (!name || !phone || !delivery) return null;
+  if (!email && !social) return null;
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return null;
 
   return { name, phone, email, marketingConsent, social, delivery, comment };

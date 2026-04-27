@@ -37,8 +37,9 @@ export const validateOrderFormData = (data: OrderFormData): string | null => {
   const normalized = normalizeOrderFormData(data);
 
   if (!normalized.name) return "Введите имя.";
-  if (!normalized.phone) return "Введите телефон.";
+  if (!normalized.phone) return "Укажите номер телефона";
   if (!/^\+?[0-9\s()\-]{7,30}$/.test(normalized.phone)) return "Введите корректный телефон.";
+  if (!normalized.email && !normalized.social) return "Укажите email или Telegram/Instagram для связи";
   if (normalized.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(normalized.email)) return "Введите корректный email.";
   if (normalized.delivery !== "pickup" && normalized.delivery !== "yandex") return "Выберите способ получения.";
   if (!normalized.privacyConsent) return "Необходимо согласие на обработку персональных данных";
