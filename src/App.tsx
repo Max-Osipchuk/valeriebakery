@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import LoadingScreen from "./components/LoadingScreen";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Privacy from "./pages/Privacy";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
