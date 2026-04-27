@@ -266,7 +266,14 @@ const HeroSection = () => {
                       </a>
                     </span>
                   </label>
-                  <Button type="submit" variant="hero" size="xl" className="w-full disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none" disabled={isLoading || !formData.privacyConsent}>
+                  <Button
+                    type="submit"
+                    variant="hero"
+                    size="xl"
+                    aria-disabled={!formData.privacyConsent || isLoading}
+                    className={`w-full ${!formData.privacyConsent ? "bg-muted text-muted-foreground shadow-none hover:scale-100 hover:shadow-none" : ""}`}
+                    disabled={isLoading}
+                  >
                     {isLoading ? (
                       <>
                         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
