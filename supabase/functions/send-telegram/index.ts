@@ -21,6 +21,8 @@ const getCorsHeaders = (origin: string | null) => {
 interface TelegramRequest {
   name: string;
   phone: string;
+  email?: string;
+  marketingConsent?: boolean;
   social?: string;
   delivery?: "pickup" | "yandex";
   comment?: string;
@@ -30,6 +32,7 @@ const LIMITS = {
   name: 100,
   phone: 30,
   social: 100,
+  email: 254,
   comment: 500,
 } as const;
 
@@ -53,13 +56,16 @@ const validatePayload = (payload: unknown): TelegramRequest | null => {
   const data = payload as Record<string, unknown>;
   const name = normalizeText(data.name, LIMITS.name);
   const phone = normalizeText(data.phone, LIMITS.phone);
+  const email = normalizeText(data.email ?? "", LIMITS.email) ?? "";
   const social = normalizeText(data.social ?? "", LIMITS.social) ?? "";
   const comment = normalizeText(data.comment ?? "", LIMITS.comment) ?? "";
+  const marketingConsent = Boolean(data.marketingConsent && email);
   const delivery = data.delivery === "pickup" || data.delivery === "yandex" ? data.delivery : null;
 
   if (!name || !phone || !delivery) return null;
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return null;
 
-  return { name, phone, social, delivery, comment };
+  return { name, phone, email, marketingConsent, social, delivery, comment };
 };
 
 serve(async (req) => {
@@ -107,13 +113,15 @@ serve(async (req) => {
       );
     }
 
-    const { name, phone, social, delivery, comment } = validated;
+    const { name, phone, email, marketingConsent, social, delivery, comment } = validated;
     const deliveryText = delivery === "pickup" ? "🏠 Самовывоз" : "🚗 Яндекс Доставка";
 
     const message = `🎂 <b>Новая заявка с сайта Valerie Bakery</b>
 
 👤 <b>Имя:</b> ${escapeHtml(name)}
 📞 <b>Телефон:</b> ${escapeHtml(phone)}
+${email ? `📧 <b>Email:</b> ${escapeHtml(email)}` : ""}
+${marketingConsent ? "✅ <b>Подписка на рассылку:</b> да" : ""}
 ${social ? `📱 <b>Соцсеть:</b> ${escapeHtml(social)}` : ""}
 ${deliveryText ? `📦 <b>Доставка:</b> ${deliveryText}` : ""}
 ${comment ? `💬 <b>Комментарий:</b> ${escapeHtml(comment)}` : ""}
