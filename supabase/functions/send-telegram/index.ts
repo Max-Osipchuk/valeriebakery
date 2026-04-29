@@ -50,6 +50,8 @@ const normalizeText = (value: unknown, maxLength: number) => {
   return trimmed;
 };
 
+const normalizeTelegramBotToken = (value: string) => value.trim().replace(/^bot/i, "");
+
 const validatePayload = (payload: unknown): TelegramRequest | null => {
   if (!payload || typeof payload !== "object") return null;
 
@@ -84,8 +86,8 @@ serve(async (req) => {
   }
 
   try {
-    const TELEGRAM_BOT_TOKEN = Deno.env.get("TELEGRAM_BOT_TOKEN");
-    const TELEGRAM_CHAT_ID = Deno.env.get("TELEGRAM_CHAT_ID");
+    const TELEGRAM_BOT_TOKEN = normalizeTelegramBotToken(Deno.env.get("TELEGRAM_BOT_TOKEN") ?? "");
+    const TELEGRAM_CHAT_ID = Deno.env.get("TELEGRAM_CHAT_ID")?.trim();
 
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       console.error("Missing Telegram configuration");
