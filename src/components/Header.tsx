@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navigationItems = [
+    { label: "Меню", id: "menu" },
+    { label: "Галерея", id: "gallery" },
+    { label: "Вопросы", id: "faq" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +23,7 @@ const Header = () => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false);
     }
   };
 
@@ -26,22 +35,30 @@ const Header = () => {
           : "bg-transparent py-5"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <span className="font-serif text-2xl md:text-3xl font-bold text-chocolate">
-            Valerie
-          </span>
-          <span className="font-serif text-xl md:text-2xl italic text-dustyPink">
-            Bakery
-          </span>
-        </a>
+      <div className="container mx-auto flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cream/90 text-chocolate shadow-soft transition-all duration-300 hover:bg-cream md:hidden"
+            aria-label={isMobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+
+          <a href="#" className="flex items-center gap-2">
+            <span className="font-serif text-2xl md:text-3xl font-bold text-chocolate">
+              Valerie
+            </span>
+            <span className="font-serif text-xl md:text-2xl italic text-dustyPink">
+              Bakery
+            </span>
+          </a>
+        </div>
 
         <nav className="hidden md:flex items-center gap-8">
-          {[
-            { label: "Меню", id: "menu" },
-            { label: "Галерея", id: "gallery" },
-            { label: "Вопросы", id: "faq" },
-          ].map((item) => (
+          {navigationItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
@@ -59,6 +76,24 @@ const Header = () => {
         >
           Заказать
         </button>
+      </div>
+
+      <div
+        className={`container mx-auto md:hidden overflow-hidden transition-all duration-300 ease-out ${
+          isMobileMenuOpen ? "max-h-56 opacity-100 pt-4" : "max-h-0 opacity-0 pt-0"
+        }`}
+      >
+        <nav className="rounded-lg bg-cream/95 p-2 shadow-elevated backdrop-blur-md">
+          {navigationItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className="block w-full rounded-md px-4 py-3 text-left font-medium text-chocolate-light transition-colors duration-300 hover:bg-gold/15 hover:text-chocolate"
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
       </div>
     </header>
   );
