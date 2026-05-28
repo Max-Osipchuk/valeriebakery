@@ -144,13 +144,6 @@ const HeroSection = () => {
 
             {/* Contact Form */}
             <div className="bg-card/95 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-elevated border border-border/50 animate-scale-in">
-              <h2 className="font-serif text-2xl md:text-3xl text-chocolate mb-2">
-                Оставить заявку
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                Опишите ваш идеальный торт, и мы свяжемся с вами
-              </p>
-
               {isSubmitted ? (
                 <div className="text-center py-8">
                   <div className="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -200,6 +193,13 @@ const HeroSection = () => {
                   </div>
                 </div>
               ) : (
+                <>
+                  <h2 className="font-serif text-2xl md:text-3xl text-chocolate mb-2">
+                    Оставить заявку
+                  </h2>
+                  <p className="text-muted-foreground mb-6">
+                    Опишите ваш идеальный торт, и мы свяжемся с вами
+                  </p>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
                     <input
@@ -339,6 +339,7 @@ const HeroSection = () => {
                     </p>
                   )}
                 </form>
+                </>
               )}
             </div>
           </div>
