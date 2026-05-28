@@ -32,7 +32,7 @@ interface MenuCategory {
 const menuData: MenuCategory[] = [
   {
     id: "biscuit1",
-    title: "Бисквитные торты",
+    title: "Тропические & Фруктовые",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
     image: gallery15,
@@ -45,7 +45,7 @@ const menuData: MenuCategory[] = [
   },
   {
     id: "biscuit2",
-    title: "Бисквитные торты",
+    title: "Ореховые & Ягодные",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
     image: gallery16,
@@ -58,7 +58,7 @@ const menuData: MenuCategory[] = [
   },
   {
     id: "biscuit3",
-    title: "Бисквитные торты",
+    title: "Шоколадные & Карамельные",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
     image: gallery17,

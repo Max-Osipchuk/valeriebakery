@@ -23,6 +23,17 @@ const CTASection = () => {
       (formData.email.trim() || formData.social.trim()) &&
       formData.privacyConsent
   );
+  const isTouched = Boolean(
+    formData.name || formData.phone || formData.social || formData.email ||
+    formData.comment || formData.privacyConsent
+  );
+  const submitHint = isTouched && !isSubmitReady
+    ? !formData.phone.trim()
+      ? "Укажите номер телефона"
+      : !formData.email.trim() && !formData.social.trim()
+      ? "Укажите email или Telegram"
+      : "Подтвердите согласие с политикой конфиденциальности"
+    : null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,10 +60,6 @@ const CTASection = () => {
       }
 
       setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({ name: "", phone: "", social: "", email: "", marketingConsent: false, privacyConsent: false, delivery: "pickup", comment: "" });
-      }, 3000);
     } catch (error) {
       console.error('Error:', error);
       toast.error('Ошибка отправки. Попробуйте позже.');
@@ -147,16 +154,52 @@ const CTASection = () => {
             </h3>
 
             {isSubmitted ? (
-              <div className="text-center py-10">
+              <div className="text-center py-8">
                 <div className="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Heart className="w-8 h-8 text-gold fill-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-cream mb-2">
-                  Спасибо за заявку!
+                <h3 className="font-serif text-2xl text-cream mb-2">
+                  Заявка принята!
                 </h3>
-                <p className="text-cream/70">
-                  Мы свяжемся с вами в ближайшее время
+                <p className="text-cream/90 mb-1">
+                  Свяжемся с вами в течение часа
                 </p>
+                <p className="text-sm text-cream/55 mb-6">
+                  Пн–Вс, 9:00–21:00
+                </p>
+                <div className="bg-cream/10 rounded-2xl px-5 py-4 mb-6 text-left space-y-2">
+                  <p className="text-xs font-medium text-gold uppercase tracking-wider mb-3">Что будет дальше</p>
+                  <div className="flex items-start gap-2 text-sm text-cream/80">
+                    <span className="text-gold font-bold shrink-0">1.</span>
+                    <span>Мы изучим заявку и подберём для вас варианты</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-sm text-cream/80">
+                    <span className="text-gold font-bold shrink-0">2.</span>
+                    <span>Позвоним или напишем, чтобы уточнить детали</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-sm text-cream/80">
+                    <span className="text-gold font-bold shrink-0">3.</span>
+                    <span>Согласуем дизайн, вкус и дату — и приступим к работе</span>
+                  </div>
+                </div>
+                <p className="text-sm text-cream/55 mb-1">Если срочно — звоните напрямую:</p>
+                <a
+                  href="tel:+79819384324"
+                  className="text-lg font-semibold text-cream hover:text-gold transition-colors"
+                >
+                  +7 (981) 938-43-24
+                </a>
+                <div className="mt-6">
+                  <button
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setFormData({ name: "", phone: "", social: "", email: "", marketingConsent: false, privacyConsent: false, delivery: "pickup", comment: "" });
+                    }}
+                    className="text-sm text-cream/50 hover:text-gold transition-colors underline underline-offset-2"
+                  >
+                    Оставить ещё одну заявку
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -280,8 +323,7 @@ const CTASection = () => {
                   type="submit"
                   variant="hero"
                   size="xl"
-                  aria-disabled={!isSubmitReady || isLoading}
-                  className={`w-full ${!isSubmitReady ? "bg-muted text-muted-foreground shadow-none hover:scale-100 hover:shadow-none" : ""}`}
+                  className="w-full"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -293,6 +335,11 @@ const CTASection = () => {
                     'Оставить заявку'
                   )}
                 </Button>
+                {submitHint && (
+                  <p className="text-center text-sm text-cream/60">
+                    {submitHint}
+                  </p>
+                )}
               </form>
             )}
           </div>
