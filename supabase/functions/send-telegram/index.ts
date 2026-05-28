@@ -138,7 +138,7 @@ ${comment ? `💬 <b>Комментарий:</b> ${escapeHtml(comment)}` : ""}
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: message,
-      console.error("Telegram API error", { status: telegramResponse.status, body: errorText });
+        parse_mode: "HTML",
       }),
     });
 
