@@ -144,7 +144,7 @@ ${comment ? `💬 <b>Комментарий:</b> ${escapeHtml(comment)}` : ""}
 
     if (!telegramResponse.ok) {
       const errorText = await telegramResponse.text();
-      console.error("Telegram API error", { status: telegramResponse.status, bodyLength: errorText.length });
+      console.error("Telegram API error", { status: telegramResponse.status, body: errorText, chatId: TELEGRAM_CHAT_ID });
       return new Response(
         JSON.stringify({ error: "Failed to send request" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
