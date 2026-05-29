@@ -86,6 +86,16 @@ serve(async (req) => {
   }
 
   try {
+    // Require Supabase anon JWT to deter unauthenticated direct calls
+    const authHeader = req.headers.get("Authorization") ?? req.headers.get("authorization");
+    const apiKeyHeader = req.headers.get("apikey");
+    if (!authHeader?.startsWith("Bearer ") && !apiKeyHeader) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const TELEGRAM_BOT_TOKEN = normalizeTelegramBotToken(Deno.env.get("TELEGRAM_BOT_TOKEN") ?? "");
     const TELEGRAM_CHAT_ID = Deno.env.get("TELEGRAM_CHAT_ID")?.trim();
 
