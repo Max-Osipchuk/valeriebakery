@@ -6,7 +6,6 @@ interface PhoneInputProps {
   className?: string;
   placeholder?: string;
   required?: boolean;
-  maxLength?: number;
 }
 
 const PhoneInput = ({
@@ -21,7 +20,7 @@ const PhoneInput = ({
       mask="+7 (999) 999-99-99"
       value={value}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
-      alwaysShowMask={false}
+      alwaysShowMask={true}
     >
       {(inputProps: React.InputHTMLAttributes<HTMLInputElement>) => (
         <input
