@@ -168,6 +168,8 @@ const MenuSection = () => {
                 <img
                   src={category.image}
                   alt={category.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-chocolate/60 to-transparent" />
