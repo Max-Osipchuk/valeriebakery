@@ -204,15 +204,10 @@ const HeroSection = () => {
                     />
                   </div>
                   <div>
-                    <input
-                      type="tel"
-                      placeholder="Телефон"
-                      required
-                      maxLength={orderFieldLimits.phone}
+                    <PhoneInput
                       value={formData.phone}
-                      onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
-                      }
+                      onChange={(val) => setFormData({ ...formData, phone: val })}
+                      required
                       className="w-full px-5 py-4 bg-cream rounded-xl border border-border focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-chocolate placeholder:text-muted-foreground"
                     />
                   </div>
