@@ -5,6 +5,7 @@ import heroImage from "@/assets/hero-cake.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { normalizeOrderFormData, orderFieldLimits, validateOrderFormData } from "@/lib/orderValidation";
+import PhoneInput from "@/components/PhoneInput";
 
 const HeroSection = () => {
   const [formData, setFormData] = useState({
