@@ -4,6 +4,7 @@ import { Heart, Phone, MapPin, Clock, Instagram, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { normalizeOrderFormData, orderFieldLimits, validateOrderFormData } from "@/lib/orderValidation";
+import PhoneInput from "@/components/PhoneInput";
 
 const CTASection = () => {
   const [formData, setFormData] = useState({
