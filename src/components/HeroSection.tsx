@@ -114,9 +114,9 @@ const HeroSection = () => {
               ))}
             </div>
 
-            {/* Hero Image for Mobile */}
-            <div className="lg:hidden mb-10">
-              <div className="relative mx-auto max-w-sm">
+            {/* Hero Image */}
+            <div className="mb-10 lg:mb-0 lg:mt-12">
+              <div className="relative mx-auto max-w-sm lg:max-w-md lg:mx-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-dustyPink/20 to-gold/20 rounded-3xl blur-2xl transform scale-110" />
                 <img
                   src={heroImage}
@@ -127,20 +127,8 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right - Form + Image */}
+          {/* Right - Form */}
           <div className="relative">
-            {/* Hero Image for Desktop */}
-            <div className="hidden lg:block absolute -top-10 -right-10 w-[120%] h-[120%] -z-10">
-              <div className="absolute inset-0 bg-gradient-to-br from-dustyPink/20 to-gold/20 rounded-[40px] blur-3xl" />
-            </div>
-
-            <div className="hidden lg:block absolute -top-20 right-0 w-[400px] h-[400px] -z-10">
-              <img
-                src={heroImage}
-                alt="Изысканный торт"
-                className="w-full h-full object-cover rounded-[40px] shadow-elevated opacity-40"
-              />
-            </div>
 
             {/* Contact Form */}
             <div className="bg-card/95 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-elevated border border-border/50 animate-scale-in">
