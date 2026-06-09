@@ -69,7 +69,7 @@ const GallerySection = () => {
               style={{ animationDelay: `${index * 0.05}s` }}
               onClick={() => setSelectedImage(image.src)}
             >
-              <div className="aspect-square overflow-hidden">
+              <div className={`overflow-hidden ${image.span.includes("col-span-2") ? "aspect-square md:aspect-[2/1]" : "aspect-square"}`}>
                 <img
                   src={image.src}
                   alt={image.alt}
