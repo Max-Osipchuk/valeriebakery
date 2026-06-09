@@ -35,7 +35,7 @@ const galleryImages = [
   { src: gallery12, alt: "Розовый торт с цветами и ягодами", span: "col-span-1 row-span-1" },
   { src: gallery13, alt: "Чёрный торт с золотым львом", span: "col-span-1 row-span-1" },
   { src: gallery14, alt: "Персиковый торт с розами и эвкалиптом", span: "col-span-2 row-span-1" },
-  { src: gallery15, alt: "Персиковый торт с цветами", span: "col-span-1 row-span-1" },
+  
   { src: gallery16, alt: "Белый торт с малиной и лавандой", span: "col-span-1 row-span-1" },
   { src: gallery17, alt: "Фисташковый торт с ягодами", span: "col-span-2 row-span-1" },
   { src: gallery18, alt: "Капкейки с мишками и погремушками", span: "col-span-1 row-span-1" },
@@ -69,7 +69,7 @@ const GallerySection = () => {
               style={{ animationDelay: `${index * 0.05}s` }}
               onClick={() => setSelectedImage(image.src)}
             >
-              <div className={`overflow-hidden ${image.span.includes("col-span-2") ? "aspect-square md:aspect-[2/1]" : "aspect-square"}`}>
+              <div className="aspect-square overflow-hidden">
                 <img
                   src={image.src}
                   alt={image.alt}
