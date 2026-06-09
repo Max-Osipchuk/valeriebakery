@@ -65,8 +65,8 @@ const GallerySection = () => {
           {galleryImages.map((image, index) => (
             <div
               key={index}
-              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${image.span} animate-fade-up`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${image.span} animate-fade-up shadow-soft hover:shadow-elevated transition-shadow duration-500`}
+              style={{ animationDelay: `${index * 0.05}s` }}
               onClick={() => setSelectedImage(image.src)}
             >
               <div className="aspect-square overflow-hidden">
@@ -75,12 +75,18 @@ const GallerySection = () => {
                   alt={image.alt}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-[1200ms] ease-out"
                 />
               </div>
-              <div className="absolute inset-0 bg-chocolate/0 group-hover:bg-chocolate/30 transition-colors duration-300 flex items-center justify-center">
-                <span className="text-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium">
-                  Увеличить
+              {/* Gradient veil */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-chocolate/70 via-chocolate/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Gold frame on hover */}
+              <div className="pointer-events-none absolute inset-2 rounded-xl border border-gold/0 group-hover:border-gold/60 transition-all duration-500" />
+              {/* Caption */}
+              <div className="absolute inset-x-4 bottom-4 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                <span className="inline-flex items-center gap-2 text-cream text-sm font-medium tracking-wide">
+                  <span className="h-px w-6 bg-gold" />
+                  Смотреть
                 </span>
               </div>
             </div>
