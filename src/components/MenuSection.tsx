@@ -160,33 +160,35 @@ const MenuSection = () => {
           {menuData.map((category, index) => (
             <div
               key={category.id}
-              className="group bg-card rounded-3xl overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-500 animate-fade-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="group relative bg-card rounded-3xl overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-500 hover:-translate-y-1 animate-fade-up border border-border/40 hover:border-gold/40"
+              style={{ animationDelay: `${index * 0.08}s` }}
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative h-60 overflow-hidden">
                 <img
                   src={category.image}
                   alt={category.title}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-[1200ms] ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-chocolate/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-chocolate/80 via-chocolate/20 to-transparent" />
+                {/* Price chip */}
+                <div className="absolute top-4 right-4 bg-cream/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-soft">
+                  <span className="text-chocolate font-semibold text-sm">
+                    {category.price}
+                  </span>
+                </div>
                 <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="font-serif text-2xl text-cream mb-1">
+                  <h3 className="font-serif text-2xl text-cream mb-1 drop-shadow-sm">
                     {category.title}
                   </h3>
-                  <div className="flex items-center gap-3">
-                    <span className="text-gold font-semibold text-lg">
-                      {category.price}
+                  {category.minWeight && (
+                    <span className="inline-flex items-center gap-2 text-cream/80 text-xs tracking-wide">
+                      <span className="h-px w-5 bg-gold" />
+                      {category.minWeight}
                     </span>
-                    {category.minWeight && (
-                      <span className="text-cream/70 text-sm">
-                        {category.minWeight}
-                      </span>
-                    )}
-                  </div>
+                  )}
                 </div>
               </div>
 
