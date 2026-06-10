@@ -97,6 +97,15 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
   const [formData, setFormData] = useState(emptyFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
+  const detailsSummary = [
+    formData.flavor,
+    formData.eventDate && formatEventDate(formData.eventDate),
+    formData.weight,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   const minEventDate = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
     .toISOString()
@@ -106,6 +115,7 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
     const handleSelectFlavor = (event: Event) => {
       const flavor = (event as CustomEvent<string>).detail;
       setFormData((prev) => ({ ...prev, flavor }));
+      setShowDetails(true);
       setIsSubmitted(false);
     };
     window.addEventListener(SELECT_FLAVOR_EVENT, handleSelectFlavor);
@@ -224,6 +234,7 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
           <button
             onClick={() => {
               setIsSubmitted(false);
+              setShowDetails(false);
               setFormData(emptyFormData);
             }}
             className={`text-sm hover:text-gold transition-colors underline underline-offset-2 ${s.successAgain}`}
@@ -287,81 +298,94 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
             className={s.input}
           />
         </div>
-        <div className="relative">
-          <select
-            value={formData.flavor}
-            onChange={(e) => setFormData({ ...formData, flavor: e.target.value })}
-            className={`${s.input} appearance-none cursor-pointer pr-12 [&>option]:text-chocolate [&>optgroup]:text-chocolate ${formData.flavor ? "" : variant === "dark" ? "text-cream/50" : "text-muted-foreground"}`}
+        <div>
+          <button
+            type="button"
+            onClick={() => setShowDetails((open) => !open)}
+            className={`w-full flex items-center justify-between text-sm transition-colors hover:text-gold ${s.hint}`}
           >
-            <option value="">Начинка (если уже выбрали)</option>
-            {menuData
-              .filter((category) => category.flavors)
-              .map((category) => (
-                <optgroup key={category.id} label={category.title}>
-                  {category.flavors!.map((flavor) => (
-                    <option key={flavor.name} value={flavor.name}>
-                      {flavor.name}
-                    </option>
-                  ))}
-                </optgroup>
-              ))}
-            <optgroup label="Другое">
-              {extraFlavorOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </optgroup>
-          </select>
-          <ChevronDown
-            className={`absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none ${s.selectChevron}`}
-          />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className={s.fieldLabel}>Дата события</label>
-            <input
-              type="date"
-              min={minEventDate}
-              value={formData.eventDate}
-              onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-              className={`${s.input} ${s.colorScheme}`}
+            <span className="truncate text-left">
+              {detailsSummary
+                ? `🎂 ${detailsSummary}`
+                : "🎂 Уже выбрали торт? Добавьте детали (необязательно)"}
+            </span>
+            <ChevronDown
+              className={`w-5 h-5 shrink-0 transition-transform duration-300 ${
+                showDetails ? "rotate-180" : ""
+              }`}
             />
-          </div>
-          <div>
-            <label className={s.fieldLabel}>Примерный вес</label>
-            <div className="relative">
-              <select
-                value={formData.weight}
-                onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-                className={`${s.input} appearance-none cursor-pointer pr-12 [&>option]:text-chocolate ${formData.weight ? "" : variant === "dark" ? "text-cream/50" : "text-muted-foreground"}`}
-              >
-                <option value="">Не знаю</option>
-                {weightOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown
-                className={`absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none ${s.selectChevron}`}
-              />
+          </button>
+          <div
+            className={`overflow-hidden transition-all duration-500 ${
+              showDetails ? "max-h-[400px] mt-4" : "max-h-0"
+            }`}
+          >
+            <div className="space-y-4">
+              <div className="relative">
+                <select
+                  value={formData.flavor}
+                  onChange={(e) => setFormData({ ...formData, flavor: e.target.value })}
+                  className={`${s.input} appearance-none cursor-pointer pr-12 [&>option]:text-chocolate [&>optgroup]:text-chocolate ${formData.flavor ? "" : variant === "dark" ? "text-cream/50" : "text-muted-foreground"}`}
+                >
+                  <option value="">Начинка (если уже выбрали)</option>
+                  {menuData
+                    .filter((category) => category.flavors)
+                    .map((category) => (
+                      <optgroup key={category.id} label={category.title}>
+                        {category.flavors!.map((flavor) => (
+                          <option key={flavor.name} value={flavor.name}>
+                            {flavor.name}
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))}
+                  <optgroup label="Другое">
+                    {extraFlavorOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </optgroup>
+                </select>
+                <ChevronDown
+                  className={`absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none ${s.selectChevron}`}
+                />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className={s.fieldLabel}>Дата события</label>
+                  <input
+                    type="date"
+                    min={minEventDate}
+                    value={formData.eventDate}
+                    onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
+                    className={`${s.input} ${s.colorScheme}`}
+                  />
+                </div>
+                <div>
+                  <label className={s.fieldLabel}>Примерный вес</label>
+                  <div className="relative">
+                    <select
+                      value={formData.weight}
+                      onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
+                      className={`${s.input} appearance-none cursor-pointer pr-12 [&>option]:text-chocolate ${formData.weight ? "" : variant === "dark" ? "text-cream/50" : "text-muted-foreground"}`}
+                    >
+                      <option value="">Не знаю</option>
+                      {weightOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      className={`absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none ${s.selectChevron}`}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <label
-          title={!formData.email.trim() ? "Укажите email чтобы подписаться" : undefined}
-          className={`flex items-start gap-3 text-sm transition-colors ${formData.email.trim() ? s.marketingActive : s.marketingInactive}`}
-        >
-          <input
-            type="checkbox"
-            checked={formData.marketingConsent}
-            disabled={!formData.email.trim()}
-            onChange={(e) => setFormData({ ...formData, marketingConsent: e.target.checked })}
-            className={`mt-0.5 h-4 w-4 rounded accent-gold disabled:cursor-not-allowed disabled:opacity-40 ${s.checkbox}`}
-          />
-          <span>Хочу получать скидки и узнавать о новинках и акциях</span>
-        </label>
         <div className="flex gap-3">
           <button
             type="button"
@@ -394,6 +418,19 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
             className={`${s.input} resize-none`}
           />
         </div>
+        <label
+          title={!formData.email.trim() ? "Укажите email чтобы подписаться" : undefined}
+          className={`flex items-start gap-3 text-sm transition-colors ${formData.email.trim() ? s.marketingActive : s.marketingInactive}`}
+        >
+          <input
+            type="checkbox"
+            checked={formData.marketingConsent}
+            disabled={!formData.email.trim()}
+            onChange={(e) => setFormData({ ...formData, marketingConsent: e.target.checked })}
+            className={`mt-0.5 h-4 w-4 rounded accent-gold disabled:cursor-not-allowed disabled:opacity-40 ${s.checkbox}`}
+          />
+          <span>Хочу получать скидки и узнавать о новинках и акциях</span>
+        </label>
         <label className={`flex items-start gap-3 text-xs leading-relaxed ${s.privacy}`}>
           <input
             type="checkbox"
