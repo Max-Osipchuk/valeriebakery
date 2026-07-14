@@ -5,7 +5,6 @@ export interface OrderFormData {
   phone: string;
   social: string;
   email: string;
-  marketingConsent: boolean;
   privacyConsent: boolean;
   delivery: OrderDelivery;
   comment: string;
@@ -27,7 +26,6 @@ export const normalizeOrderFormData = (data: OrderFormData): OrderFormData => ({
   phone: cleanText(data.phone, orderFieldLimits.phone),
   social: cleanText(data.social, orderFieldLimits.social),
   email: cleanText(data.email, orderFieldLimits.email),
-  marketingConsent: Boolean(data.marketingConsent && data.email.trim()),
   privacyConsent: Boolean(data.privacyConsent),
   delivery: data.delivery,
   comment: cleanText(data.comment, orderFieldLimits.comment),

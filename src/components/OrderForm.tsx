@@ -29,8 +29,6 @@ const styles = {
     hint: "text-sm text-muted-foreground",
     fieldLabel: "block text-sm text-muted-foreground mb-1.5",
     selectChevron: "text-muted-foreground",
-    marketingActive: "text-chocolate-light",
-    marketingInactive: "text-muted-foreground",
     checkbox: "border-border",
     deliveryActive: "bg-gold text-chocolate border-gold",
     deliveryInactive: "bg-cream border-border text-chocolate-light hover:border-gold/50",
@@ -50,8 +48,6 @@ const styles = {
     hint: "text-sm text-cream/55",
     fieldLabel: "block text-sm text-cream/55 mb-1.5",
     selectChevron: "text-cream/50",
-    marketingActive: "text-cream/75",
-    marketingInactive: "text-cream/35",
     checkbox: "border-cream/20",
     deliveryActive: "bg-gold text-chocolate border-gold",
     deliveryInactive: "bg-cream/10 border-cream/20 text-cream/70 hover:border-gold/50",
@@ -71,7 +67,6 @@ const emptyFormData = {
   phone: "",
   social: "",
   email: "",
-  marketingConsent: false,
   privacyConsent: false,
   delivery: "pickup" as "pickup" | "yandex",
   flavor: "",
@@ -159,7 +154,6 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
       phone: formData.phone,
       social: formData.social,
       email: formData.email,
-      marketingConsent: formData.marketingConsent,
       privacyConsent: formData.privacyConsent,
       delivery: formData.delivery,
       comment: packedComment,
@@ -293,7 +287,7 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
             maxLength={orderFieldLimits.email}
             value={formData.email}
             onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value, marketingConsent: e.target.value.trim() ? formData.marketingConsent : false })
+              setFormData({ ...formData, email: e.target.value })
             }
             className={s.input}
           />
@@ -418,19 +412,6 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
             className={`${s.input} resize-none`}
           />
         </div>
-        <label
-          title={!formData.email.trim() ? "Укажите email чтобы подписаться" : undefined}
-          className={`flex items-start gap-3 text-sm transition-colors ${formData.email.trim() ? s.marketingActive : s.marketingInactive}`}
-        >
-          <input
-            type="checkbox"
-            checked={formData.marketingConsent}
-            disabled={!formData.email.trim()}
-            onChange={(e) => setFormData({ ...formData, marketingConsent: e.target.checked })}
-            className={`mt-0.5 h-4 w-4 rounded accent-gold disabled:cursor-not-allowed disabled:opacity-40 ${s.checkbox}`}
-          />
-          <span>Хочу получать скидки и узнавать о новинках и акциях</span>
-        </label>
         <label className={`flex items-start gap-3 text-xs leading-relaxed ${s.privacy}`}>
           <input
             type="checkbox"
