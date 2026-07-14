@@ -90,6 +90,7 @@ interface OrderFormProps {
 const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFormProps) => {
   const s = styles[variant];
   const [formData, setFormData] = useState(emptyFormData);
+  const [honeypot, setHoneypot] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -169,7 +170,7 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
 
     try {
       const { error } = await supabase.functions.invoke('send-telegram', {
-        body: normalizedData,
+        body: { ...normalizedData, website: honeypot },
       });
 
       if (error) {
@@ -244,6 +245,16 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
     <>
       {header}
       <form onSubmit={handleSubmit} className="space-y-5">
+        <input
+          type="text"
+          name="website"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute -left-[9999px] h-px w-px opacity-0"
+        />
         <div>
           <input
             type="text"

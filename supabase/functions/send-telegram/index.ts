@@ -22,7 +22,6 @@ interface TelegramRequest {
   name: string;
   phone: string;
   email?: string;
-  marketingConsent?: boolean;
   social?: string;
   delivery?: "pickup" | "yandex";
   comment?: string;
@@ -35,6 +34,42 @@ const LIMITS = {
   email: 254,
   comment: 500,
 } as const;
+
+const RATE_LIMIT = {
+  perIp: 5,
+  perIpWindowMs: 10 * 60 * 1000,
+  global: 40,
+  globalWindowMs: 60 * 60 * 1000,
+  maxTrackedIps: 1000,
+} as const;
+
+// Счётчики живут в памяти изолята: сбрасываются при холодном старте и не
+// разделяются между инстансами, но тёплый изолят гасит основной поток флуда.
+const ipHits = new Map<string, number[]>();
+let globalHits: number[] = [];
+
+const isRateLimited = (ip: string) => {
+  const now = Date.now();
+  globalHits = globalHits.filter((t) => now - t < RATE_LIMIT.globalWindowMs);
+  const hits = (ipHits.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT.perIpWindowMs);
+  if (hits.length >= RATE_LIMIT.perIp || globalHits.length >= RATE_LIMIT.global) {
+    ipHits.set(ip, hits);
+    return true;
+  }
+  if (ipHits.size >= RATE_LIMIT.maxTrackedIps && !ipHits.has(ip)) {
+    for (const [key, timestamps] of ipHits) {
+      if (!timestamps.some((t) => now - t < RATE_LIMIT.perIpWindowMs)) ipHits.delete(key);
+    }
+  }
+  hits.push(now);
+  ipHits.set(ip, hits);
+  globalHits.push(now);
+  return false;
+};
+
+const isHoneypotTripped = (payload: unknown) =>
+  typeof payload === "object" && payload !== null &&
+  Boolean((payload as Record<string, unknown>).website);
 
 const escapeHtml = (value: string) =>
   value
@@ -61,14 +96,13 @@ const validatePayload = (payload: unknown): TelegramRequest | null => {
   const email = normalizeText(data.email ?? "", LIMITS.email) ?? "";
   const social = normalizeText(data.social ?? "", LIMITS.social) ?? "";
   const comment = normalizeText(data.comment ?? "", LIMITS.comment) ?? "";
-  const marketingConsent = Boolean(data.marketingConsent && email);
   const delivery = data.delivery === "pickup" || data.delivery === "yandex" ? data.delivery : null;
 
   if (!name || !phone || !delivery) return null;
   if (!email && !social) return null;
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return null;
 
-  return { name, phone, email, marketingConsent, social, delivery, comment };
+  return { name, phone, email, social, delivery, comment };
 };
 
 serve(async (req) => {
@@ -96,6 +130,14 @@ serve(async (req) => {
       );
     }
 
+    const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+    if (isRateLimited(clientIp)) {
+      return new Response(
+        JSON.stringify({ error: "Too many requests" }),
+        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const TELEGRAM_BOT_TOKEN = normalizeTelegramBotToken(Deno.env.get("TELEGRAM_BOT_TOKEN") ?? "");
     const TELEGRAM_CHAT_ID = Deno.env.get("TELEGRAM_CHAT_ID")?.trim();
 
@@ -117,6 +159,14 @@ serve(async (req) => {
       );
     }
 
+    // Скрытое поле формы: заполнено — значит бот; отвечаем фиктивным успехом
+    if (isHoneypotTripped(payload)) {
+      return new Response(
+        JSON.stringify({ success: true, message: "Request sent successfully" }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const validated = validatePayload(payload);
 
     if (!validated) {
@@ -126,7 +176,7 @@ serve(async (req) => {
       );
     }
 
-    const { name, phone, email, marketingConsent, social, delivery, comment } = validated;
+    const { name, phone, email, social, delivery, comment } = validated;
     const deliveryText = delivery === "pickup" ? "🏠 Самовывоз" : "🚗 Яндекс Доставка";
 
     const message = `🎂 <b>Новая заявка с сайта Valerie Bakery</b>
@@ -134,7 +184,6 @@ serve(async (req) => {
 👤 <b>Имя:</b> ${escapeHtml(name)}
 📞 <b>Телефон:</b> ${escapeHtml(phone)}
 ${email ? `📧 <b>Email:</b> ${escapeHtml(email)}` : ""}
-${marketingConsent ? "✅ <b>Подписка на рассылку:</b> да" : ""}
 ${social ? `📱 <b>Соцсеть:</b> ${escapeHtml(social)}` : ""}
 ${deliveryText ? `📦 <b>Доставка:</b> ${deliveryText}` : ""}
 ${comment ? `💬 <b>Комментарий:</b> ${escapeHtml(comment)}` : ""}
