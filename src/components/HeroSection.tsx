@@ -21,13 +21,13 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left animate-fade-up min-w-0">
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-chocolate mb-6">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-chocolate mb-6 break-words">
               Торты, в которые{" "}
               <span className="text-gradient-gold italic">влюбляются</span>{" "}
               с первого кусочка
             </h1>
 
-            <p className="text-lg md:text-xl text-chocolate-light/80 mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg md:text-xl text-chocolate-light/80 mb-8 max-w-xl mx-auto lg:mx-0 break-words">
               Торты и десерты на заказ в Санкт-Петербурге. Бенто-торты — от
               1 750 ₽, большие торты — от 3 300 ₽.
             </p>
