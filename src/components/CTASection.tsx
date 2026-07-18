@@ -13,12 +13,12 @@ const CTASection = () => {
       <div className="container mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
-          <div className="text-center lg:text-left">
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream mb-6">
+          <div className="text-center lg:text-left min-w-0">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream mb-6 break-words">
               Готовы заказать{" "}
               <span className="italic text-gold">торт мечты?</span>
             </h2>
-            <p className="text-cream/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0">
+            <p className="text-cream/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0 break-words">
               Оставьте заявку, и мы свяжемся с вами в течение часа для
               обсуждения деталей вашего идеального десерта.
             </p>
@@ -82,7 +82,7 @@ const CTASection = () => {
           </div>
 
           {/* Right - Form */}
-          <div className="bg-cream/10 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-cream/20">
+          <div className="bg-cream/10 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-cream/20 min-w-0">
             <h3 className="font-serif text-2xl md:text-3xl text-cream mb-6">
               Оставить заявку
             </h3>

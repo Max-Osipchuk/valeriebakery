@@ -20,14 +20,14 @@ const HeroSection = () => {
       <div className="container mx-auto relative z-10 pt-32 pb-20 md:pt-40 md:pb-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="text-center lg:text-left animate-fade-up">
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-chocolate mb-6">
+          <div className="text-center lg:text-left animate-fade-up min-w-0">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-chocolate mb-6 break-words">
               Торты, в которые{" "}
               <span className="text-gradient-gold italic">влюбляются</span>{" "}
               с первого кусочка
             </h1>
 
-            <p className="text-lg md:text-xl text-chocolate-light/80 mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg md:text-xl text-chocolate-light/80 mb-8 max-w-xl mx-auto lg:mx-0 break-words">
               Торты и десерты на заказ в Санкт-Петербурге. Бенто-торты — от
               1 750 ₽, большие торты — от 3 300 ₽.
             </p>
@@ -49,8 +49,8 @@ const HeroSection = () => {
             </div>
 
             {/* Hero Image */}
-            <div className="mb-10 lg:mb-0 lg:mt-12">
-              <div className="relative mx-auto max-w-sm lg:max-w-md lg:mx-0">
+            <div className="mb-10 lg:mb-0 lg:mt-12 min-w-0">
+              <div className="relative mx-auto w-full max-w-full md:max-w-sm lg:max-w-md lg:mx-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-dustyPink/20 to-gold/20 rounded-3xl blur-2xl transform scale-110" />
                 <img
                   src={heroImage}
@@ -62,7 +62,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right - Form */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="bg-card/95 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-elevated border border-border/50 animate-scale-in">
               <OrderForm
                 variant="light"
