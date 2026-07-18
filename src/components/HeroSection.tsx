@@ -20,7 +20,7 @@ const HeroSection = () => {
       <div className="container mx-auto relative z-10 pt-32 pb-20 md:pt-40 md:pb-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="text-center lg:text-left animate-fade-up">
+          <div className="text-center lg:text-left animate-fade-up min-w-0">
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-chocolate mb-6">
               Торты, в которые{" "}
               <span className="text-gradient-gold italic">влюбляются</span>{" "}
