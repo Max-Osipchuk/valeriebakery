@@ -14,11 +14,11 @@ const CTASection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left min-w-0">
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream mb-6 break-words">
               Готовы заказать{" "}
               <span className="italic text-gold">торт мечты?</span>
             </h2>
-            <p className="text-cream/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0">
+            <p className="text-cream/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0 break-words">
               Оставьте заявку, и мы свяжемся с вами в течение часа для
               обсуждения деталей вашего идеального десерта.
             </p>
