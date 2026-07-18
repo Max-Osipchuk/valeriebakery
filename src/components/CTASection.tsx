@@ -13,7 +13,7 @@ const CTASection = () => {
       <div className="container mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
-          <div className="text-center lg:text-left">
+          <div className="text-center lg:text-left min-w-0">
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream mb-6">
               Готовы заказать{" "}
               <span className="italic text-gold">торт мечты?</span>
