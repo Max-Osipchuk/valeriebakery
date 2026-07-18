@@ -49,8 +49,8 @@ const HeroSection = () => {
             </div>
 
             {/* Hero Image */}
-            <div className="mb-10 lg:mb-0 lg:mt-12">
-              <div className="relative mx-auto max-w-sm lg:max-w-md lg:mx-0">
+            <div className="mb-10 lg:mb-0 lg:mt-12 min-w-0">
+              <div className="relative mx-auto w-full max-w-full md:max-w-sm lg:max-w-md lg:mx-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-dustyPink/20 to-gold/20 rounded-3xl blur-2xl transform scale-110" />
                 <img
                   src={heroImage}
