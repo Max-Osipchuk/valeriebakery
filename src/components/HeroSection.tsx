@@ -62,7 +62,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right - Form */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="bg-card/95 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-elevated border border-border/50 animate-scale-in">
               <OrderForm
                 variant="light"
