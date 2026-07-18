@@ -82,7 +82,7 @@ const CTASection = () => {
           </div>
 
           {/* Right - Form */}
-          <div className="bg-cream/10 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-cream/20">
+          <div className="bg-cream/10 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-cream/20 min-w-0">
             <h3 className="font-serif text-2xl md:text-3xl text-cream mb-6">
               Оставить заявку
             </h3>
