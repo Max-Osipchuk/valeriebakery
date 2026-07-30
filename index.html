@@ -47,6 +47,33 @@
 </head>
 
   <body>
+    <style>
+      #app-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(160deg, #f7efe6 0%, #efe0d1 100%);
+        transition: opacity 0.4s ease-out;
+      }
+      #app-splash.is-hidden { opacity: 0; pointer-events: none; }
+      #app-splash img {
+        width: 144px;
+        height: 144px;
+        border-radius: 16px;
+        object-fit: cover;
+        animation: app-splash-breathe 2.4s ease-in-out infinite;
+      }
+      @keyframes app-splash-breathe {
+        0%, 100% { transform: scale(1); opacity: 0.9; }
+        50% { transform: scale(1.05); opacity: 1; }
+      }
+    </style>
+    <div id="app-splash">
+      <img src="/loader-poster.jpg" alt="Valerie Bakery" width="144" height="144" />
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
