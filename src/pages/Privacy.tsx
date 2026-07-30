@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 
 const sections = [
@@ -41,6 +42,21 @@ const sections = [
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-cream text-chocolate">
+      <Helmet>
+        <title>Политика конфиденциальности — Valerie Bakery</title>
+        <meta
+          name="description"
+          content="Как Valerie Bakery обрабатывает персональные данные из форм заявки: какие данные собираются, цели обработки, сроки хранения и права клиента."
+        />
+        <link rel="canonical" href="https://valeriebakery.lovable.app/privacy" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://valeriebakery.lovable.app/privacy" />
+        <meta property="og:title" content="Политика конфиденциальности — Valerie Bakery" />
+        <meta
+          property="og:description"
+          content="Как Valerie Bakery обрабатывает персональные данные из форм заявки: цели, сроки хранения и права клиента."
+        />
+      </Helmet>
       <header className="border-b border-border/70 bg-cream/95 backdrop-blur-md">
         <div className="container mx-auto flex items-center justify-between py-5">
           <a href="/" className="flex items-baseline gap-2">
@@ -59,7 +75,7 @@ const Privacy = () => {
           <h1 className="mb-6 font-serif text-4xl md:text-6xl leading-tight text-chocolate">
             Политика конфиденциальности
           </h1>
-          <p className="mb-12 text-base md:text-lg leading-relaxed text-chocolate-light/80">
+          <p className="mb-12 text-base md:text-lg leading-relaxed text-chocolate-light">
             Мы бережно относимся к вашим данным и используем их только для обработки заявок,
             связи по заказам и рассылки при вашем согласии.
           </p>
@@ -68,7 +84,7 @@ const Privacy = () => {
             {sections.map((section) => (
               <section key={section.title} className="border-t border-border/70 pt-7">
                 <h2 className="mb-3 font-serif text-2xl md:text-3xl text-chocolate">{section.title}</h2>
-                <p className="text-sm md:text-base leading-7 text-chocolate-light/85">{section.content}</p>
+                <p className="text-sm md:text-base leading-7 text-chocolate-light">{section.content}</p>
               </section>
             ))}
           </div>

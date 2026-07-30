@@ -32,7 +32,7 @@ const styles = {
     checkbox: "border-border",
     deliveryActive: "bg-gold text-chocolate border-gold",
     deliveryInactive: "bg-cream border-border text-chocolate-light hover:border-gold/50",
-    privacy: "text-chocolate-light/75",
+    privacy: "text-chocolate-light",
     successTitle: "text-chocolate",
     successLine: "text-chocolate-light",
     successMuted: "text-muted-foreground",
