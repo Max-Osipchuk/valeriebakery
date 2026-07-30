@@ -55,6 +55,10 @@ const HeroSection = () => {
                 <img
                   src={heroImage}
                   alt="Изысканный торт от Valerie Bakery"
+                  width={800}
+                  height={600}
+                  fetchPriority="high"
+                  decoding="async"
                   className="relative rounded-3xl shadow-elevated w-full object-cover aspect-[4/3]"
                 />
               </div>
