@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const faqData = [
+export const faqData = [
   {
     question: "За сколько дней нужно заказывать торт?",
     answer:

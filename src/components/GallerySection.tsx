@@ -102,6 +102,7 @@ const GallerySection = () => {
         >
           <button
             className="absolute top-6 right-6 text-cream hover:text-gold transition-colors"
+            aria-label="Закрыть просмотр фото"
             onClick={() => setSelectedImage(null)}
           >
             <X className="w-8 h-8" />
