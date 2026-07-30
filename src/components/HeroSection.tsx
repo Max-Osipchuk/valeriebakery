@@ -27,7 +27,7 @@ const HeroSection = () => {
               с первого кусочка
             </h1>
 
-            <p className="text-lg md:text-xl text-chocolate-light/80 mb-8 max-w-xl mx-auto lg:mx-0 break-words">
+            <p className="text-lg md:text-xl text-chocolate-light mb-8 max-w-xl mx-auto lg:mx-0 break-words">
               Торты и десерты на заказ в Санкт-Петербурге. Бенто-торты — от
               1 750 ₽, большие торты — от 3 300 ₽.
             </p>
