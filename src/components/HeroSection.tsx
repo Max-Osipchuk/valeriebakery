@@ -50,16 +50,16 @@ const HeroSection = () => {
 
             {/* Hero Image */}
             <div className="mb-10 lg:mb-0 lg:mt-12 min-w-0">
-              <div className="relative mx-auto w-full max-w-[280px] sm:max-w-xs lg:max-w-sm lg:mx-0">
+              <div className="relative mx-auto w-full max-w-[320px] sm:max-w-sm lg:max-w-md lg:mx-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-dustyPink/20 to-gold/20 rounded-3xl blur-2xl transform scale-110" />
                 <img
                   src={heroAsset.url}
                   alt="Свадебный торт с золотым топпером от Valerie Bakery"
                   width={1209}
-                  height={1612}
+                  height={907}
                   fetchPriority="high"
                   decoding="async"
-                  className="relative rounded-3xl shadow-elevated w-full object-cover object-center aspect-[3/4]"
+                  className="relative rounded-3xl shadow-elevated w-full object-cover object-[center_35%] aspect-[4/3]"
                 />
               </div>
             </div>
