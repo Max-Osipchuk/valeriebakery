@@ -17,8 +17,22 @@ const structuredData = {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       name: "Valerie Bakery",
+      alternateName: "Валери Бейкери",
       url: `${SITE_URL}/`,
       inLanguage: "ru-RU",
+      publisher: { "@id": `${SITE_URL}/#business` },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Valerie Bakery",
+      url: `${SITE_URL}/`,
+      logo: {
+        "@type": "ImageObject",
+        url: "https://storage.googleapis.com/gpt-engineer-file-uploads/IW4fwzxeEgQoLUO485BPvg6U9CY2/uploads/1770495402090-26DF979F-AB14-4CA9-8610-7A1A1DF2250B.jpeg",
+      },
+      sameAs: ["https://www.instagram.com/_valerie_bakery"],
+
     },
     {
       "@type": "LocalBusiness",
@@ -61,7 +75,9 @@ const Index = () => {
         <link rel="canonical" href={`${SITE_URL}/`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${SITE_URL}/`} />
+        <meta property="og:site_name" content="Valerie Bakery" />
         <meta property="og:title" content="Valerie Bakery — Торты на заказ в Санкт-Петербурге" />
+
         <meta
           property="og:description"
           content="Торты и десерты на заказ в Санкт-Петербурге. Натуральные ингредиенты, ручная работа, индивидуальный декор."
