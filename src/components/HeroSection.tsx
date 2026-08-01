@@ -1,5 +1,5 @@
 import { Sparkles, Heart, Palette } from "lucide-react";
-import heroImage from "@/assets/hero-cake.jpg";
+import heroAsset from "@/assets/hero-cake-white.jpg.asset.json";
 import OrderForm from "@/components/OrderForm";
 
 const HeroSection = () => {
@@ -50,16 +50,16 @@ const HeroSection = () => {
 
             {/* Hero Image */}
             <div className="mb-10 lg:mb-0 lg:mt-12 min-w-0">
-              <div className="relative mx-auto w-full max-w-full md:max-w-sm lg:max-w-md lg:mx-0">
+              <div className="relative mx-auto w-full max-w-[280px] sm:max-w-xs lg:max-w-sm lg:mx-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-dustyPink/20 to-gold/20 rounded-3xl blur-2xl transform scale-110" />
                 <img
-                  src={heroImage}
-                  alt="Изысканный торт от Valerie Bakery"
-                  width={800}
-                  height={600}
+                  src={heroAsset.url}
+                  alt="Свадебный торт с золотым топпером от Valerie Bakery"
+                  width={1209}
+                  height={1612}
                   fetchPriority="high"
                   decoding="async"
-                  className="relative rounded-3xl shadow-elevated w-full object-cover aspect-[4/3]"
+                  className="relative rounded-3xl shadow-elevated w-full object-cover object-center aspect-[3/4]"
                 />
               </div>
             </div>
