@@ -55,8 +55,8 @@ const HeroSection = () => {
                 <img
                   src={heroAsset.url}
                   alt="Свадебный торт с золотым топпером от Valerie Bakery"
-                  width={1209}
-                  height={907}
+                  width={834}
+                  height={625}
                   fetchPriority="high"
                   decoding="async"
                   className="relative rounded-3xl shadow-elevated w-full object-cover object-[center_35%] aspect-[4/3]"
