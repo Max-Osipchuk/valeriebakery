@@ -17,8 +17,22 @@ const structuredData = {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       name: "Valerie Bakery",
+      alternateName: "Валери Бейкери",
       url: `${SITE_URL}/`,
       inLanguage: "ru-RU",
+      publisher: { "@id": `${SITE_URL}/#business` },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Valerie Bakery",
+      url: `${SITE_URL}/`,
+      logo: {
+        "@type": "ImageObject",
+        url: "https://storage.googleapis.com/gpt-engineer-file-uploads/IW4fwzxeEgQoLUO485BPvg6U9CY2/uploads/1770495402090-26DF979F-AB14-4CA9-8610-7A1A1DF2250B.jpeg",
+      },
+      sameAs: ["https://www.instagram.com/_valerie_bakery"],
+
     },
     {
       "@type": "LocalBusiness",
