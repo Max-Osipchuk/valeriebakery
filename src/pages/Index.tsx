@@ -75,7 +75,9 @@ const Index = () => {
         <link rel="canonical" href={`${SITE_URL}/`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${SITE_URL}/`} />
+        <meta property="og:site_name" content="Valerie Bakery" />
         <meta property="og:title" content="Valerie Bakery — Торты на заказ в Санкт-Петербурге" />
+
         <meta
           property="og:description"
           content="Торты и десерты на заказ в Санкт-Петербурге. Натуральные ингредиенты, ручная работа, индивидуальный декор."
