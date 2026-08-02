@@ -1,5 +1,5 @@
 import { Sparkles, Heart, Palette } from "lucide-react";
-import heroAsset from "@/assets/hero-cake-white.jpg.asset.json";
+import heroCake from "@/assets/hero-cake-white.jpg";
 import OrderForm from "@/components/OrderForm";
 
 const HeroSection = () => {
