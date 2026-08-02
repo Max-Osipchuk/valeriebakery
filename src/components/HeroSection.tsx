@@ -53,7 +53,7 @@ const HeroSection = () => {
               <div className="relative mx-auto w-full max-w-[320px] sm:max-w-sm lg:max-w-md lg:mx-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-dustyPink/20 to-gold/20 rounded-3xl blur-2xl transform scale-110" />
                 <img
-                  src={heroAsset.url}
+                  src={heroCake}
                   alt="Свадебный торт с золотым топпером от Valerie Bakery"
                   width={834}
                   height={625}
