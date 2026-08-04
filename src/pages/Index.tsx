@@ -8,7 +8,7 @@ import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import { faqData } from "@/components/FAQSection";
 
-const SITE_URL = "https://valeriebakery.lovable.app";
+const SITE_URL = "https://valeriebakery.ru";
 
 const structuredData = {
   "@context": "https://schema.org",

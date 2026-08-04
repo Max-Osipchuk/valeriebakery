@@ -6,9 +6,9 @@
 
 Natural ingredients · handcrafted · individual decor
 
-[![Visit the site](https://img.shields.io/badge/🌐_Visit_site-valeriebakery.lovable.app-E59CB0?style=for-the-badge)](https://valeriebakery.lovable.app/)
+[![Visit the site](https://img.shields.io/badge/🌐_Visit_site-valeriebakery.ru-E59CB0?style=for-the-badge)](https://valeriebakery.ru/)
 
-[**valeriebakery.lovable.app**](https://valeriebakery.lovable.app/)
+[**valeriebakery.ru**](https://valeriebakery.ru/)
 
 ![Valerie Bakery](https://storage.googleapis.com/gpt-engineer-file-uploads/IW4fwzxeEgQoLUO485BPvg6U9CY2/social-images/social-1777320994073-CE9C9C4C-5928-41E2-8F6E-E29B0A277CDF.webp)
 
@@ -82,7 +82,7 @@ The `send-telegram` Edge Function forwards orders to Telegram — set `TELEGRAM_
 
 ### Deployment
 
-The project is deployed on [Lovable](https://lovable.dev/) and is live at **[valeriebakery.lovable.app](https://valeriebakery.lovable.app/)**. The production build (`npm run build`) can be hosted on any static host (Vercel, Netlify, GitHub Pages, etc.).
+The project is deployed on [Lovable](https://lovable.dev/) and is live at **[valeriebakery.ru](https://valeriebakery.ru/)**. The production build (`npm run build`) can be hosted on any static host (Vercel, Netlify, GitHub Pages, etc.).
 
 ---
 
@@ -150,7 +150,7 @@ Edge Function `send-telegram` отправляет заявки в Telegram — 
 
 ### Деплой
 
-Проект развёрнут на платформе [Lovable](https://lovable.dev/) и доступен по адресу **[valeriebakery.lovable.app](https://valeriebakery.lovable.app/)**. Продакшен-сборка (`npm run build`) может быть размещена на любом статическом хостинге (Vercel, Netlify, GitHub Pages и др.).
+Проект развёрнут на платформе [Lovable](https://lovable.dev/) и доступен по адресу **[valeriebakery.ru](https://valeriebakery.ru/)**. Продакшен-сборка (`npm run build`) может быть размещена на любом статическом хостинге (Vercel, Netlify, GitHub Pages и др.).
 
 ---
 
@@ -198,6 +198,6 @@ supabase/
 
 Made with ❤️ for **Valerie Bakery** · Saint Petersburg / Санкт-Петербург
 
-[🌐 Website](https://valeriebakery.lovable.app/) · [📷 Twitter / X](https://twitter.com/ValerieBakery)
+[🌐 Website](https://valeriebakery.ru/) · [📷 Twitter / X](https://twitter.com/ValerieBakery)
 
 </div>

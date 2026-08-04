@@ -48,9 +48,9 @@ const Privacy = () => {
           name="description"
           content="Как Valerie Bakery обрабатывает персональные данные из форм заявки: какие данные собираются, цели обработки, сроки хранения и права клиента."
         />
-        <link rel="canonical" href="https://valeriebakery.lovable.app/privacy" />
+        <link rel="canonical" href="https://valeriebakery.ru/privacy" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://valeriebakery.lovable.app/privacy" />
+        <meta property="og:url" content="https://valeriebakery.ru/privacy" />
         <meta property="og:title" content="Политика конфиденциальности — Valerie Bakery" />
         <meta
           property="og:description"
