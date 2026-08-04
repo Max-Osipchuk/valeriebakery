@@ -19,4 +19,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://valeriebakery.lovable.app/sitemap.xml
+Sitemap: https://valeriebakery.ru/sitemap.xml
