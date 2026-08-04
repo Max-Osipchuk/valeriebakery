@@ -25,7 +25,7 @@ const MenuSection = () => {
           {menuData.map((category, index) => (
             <div
               key={category.id}
-              className="group relative bg-card rounded-3xl overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-500 hover:-translate-y-1 animate-fade-up border border-border/40 hover:border-gold/40"
+              className="cake-card group relative bg-card rounded-3xl overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-500 hover:-translate-y-1 animate-fade-up border border-border/40 hover:border-gold/40"
               style={{ animationDelay: `${index * 0.08}s` }}
             >
               {/* Image */}
