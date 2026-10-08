@@ -82,7 +82,6 @@ const Header = () => {
       </div>
 
       <div
-        inert={isMobileMenuOpen ? undefined : ""}
         aria-hidden={!isMobileMenuOpen}
         className={`container mx-auto md:hidden overflow-hidden transition-all duration-300 ease-out ${
           isMobileMenuOpen ? "max-h-56 opacity-100 pt-4" : "max-h-0 opacity-0 pt-0"
@@ -93,6 +92,7 @@ const Header = () => {
             <Button
               variant="ghost"
               key={item.id}
+              tabIndex={isMobileMenuOpen ? 0 : -1}
               onClick={() => scrollToSection(item.id)}
               className="flex h-12 w-full justify-start rounded-md px-4 text-left font-medium text-chocolate-light transition-colors duration-300 hover:bg-gold/15 hover:text-chocolate"
             >
