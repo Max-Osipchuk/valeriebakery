@@ -37,6 +37,18 @@ const Footer = () => {
             <Heart className="w-4 h-4 text-dustyPink fill-dustyPink" /> Валерией
           </p>
         </div>
+
+        {/* Реквизиты продавца и оператора персональных данных */}
+        <div className="mt-6 pt-4 border-t border-cream/10 flex flex-col md:flex-row items-center justify-between gap-2 text-center text-sm text-cream/80">
+          {/* TODO: заменить заглушки на реальные данные Валерии: ФИО, статус (самозанятая или ИП), ИНН */}
+          <p>[ФИО], самозанятая/ИП, ИНН [____]</p>
+          <a
+            href="/privacy"
+            className="inline-block py-2 underline underline-offset-2 hover:text-cream transition-colors"
+          >
+            Политика конфиденциальности
+          </a>
+        </div>
       </div>
     </footer>
   );
