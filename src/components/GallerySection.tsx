@@ -12,12 +12,12 @@ const galleryImages = [
   { photo: photos.gallery7, alt: "Серый торт с горами — Ты покоришь любые вершины", span: "col-span-1 row-span-1" },
   { photo: photos.gallery8, alt: "Торт с домиком и ягодами на юбилей", span: "col-span-1 row-span-1" },
   { photo: photos.gallery9, alt: "Двухъярусный торт с сухоцветами", span: "col-span-2 row-span-1" },
-  { photo: photos.gallery10, alt: "Капкейки мятного и бежевого цвета в коробке", span: "col-span-1 row-span-1" },
+  // Широкая: без gallery-15 плиток стало 23 ячейки, и последний ряд оставался неполным
+  { photo: photos.gallery10, alt: "Капкейки мятного и бежевого цвета в коробке", span: "col-span-2 row-span-1" },
   { photo: photos.gallery11, alt: "Белый торт с клубникой и малиной", span: "col-span-1 row-span-1" },
   { photo: photos.gallery12, alt: "Розовый торт с цветами и ягодами", span: "col-span-1 row-span-1" },
   { photo: photos.gallery13, alt: "Чёрный торт с золотым львом", span: "col-span-1 row-span-1" },
   { photo: photos.gallery14, alt: "Персиковый торт с розами и эвкалиптом", span: "col-span-2 row-span-1" },
-  
   { photo: photos.gallery16, alt: "Белый торт с малиной и лавандой", span: "col-span-1 row-span-1" },
   { photo: photos.gallery17, alt: "Фисташковый торт с ягодами", span: "col-span-2 row-span-1" },
   { photo: photos.gallery18, alt: "Капкейки с мишками и погремушками", span: "col-span-1 row-span-1" },
@@ -43,7 +43,7 @@ const GallerySection = () => {
         </div>
 
         {/* Masonry Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 grid-flow-row-dense gap-4 md:gap-6">
           {galleryImages.map((image, index) => (
             <div
               key={index}
