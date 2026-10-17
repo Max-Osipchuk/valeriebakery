@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Heart, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -89,6 +89,8 @@ interface OrderFormProps {
 
 const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFormProps) => {
   const s = styles[variant];
+  // На странице две формы, поэтому id полей должны быть уникальными
+  const fieldId = useId();
   const [formData, setFormData] = useState(emptyFormData);
   const [honeypot, setHoneypot] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -259,6 +261,9 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
         <div>
           <input
             type="text"
+            name="name"
+            autoComplete="name"
+            aria-label="Ваше имя"
             placeholder="Ваше имя"
             required
             maxLength={orderFieldLimits.name}
@@ -283,6 +288,11 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
         <div>
           <input
             type="text"
+            name="social"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            aria-label="Telegram или Instagram"
             placeholder="Telegram (@username) или Instagram"
             maxLength={orderFieldLimits.social}
             value={formData.social}
@@ -295,6 +305,10 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
         <div>
           <input
             type="email"
+            name="email"
+            inputMode="email"
+            autoComplete="email"
+            aria-label="Email"
             placeholder="Email"
             maxLength={orderFieldLimits.email}
             value={formData.email}
@@ -329,6 +343,8 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
             <div className="space-y-4">
               <div className="relative">
                 <select
+                  name="flavor"
+                  aria-label="Начинка"
                   value={formData.flavor}
                   onChange={(e) => setFormData({ ...formData, flavor: e.target.value })}
                   className={`${s.input} appearance-none cursor-pointer pr-12 [&>option]:text-chocolate [&>optgroup]:text-chocolate ${formData.flavor ? "" : variant === "dark" ? "text-cream/50" : "text-muted-foreground"}`}
@@ -359,8 +375,10 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className={s.fieldLabel}>Дата события</label>
+                  <label htmlFor={`${fieldId}-date`} className={s.fieldLabel}>Дата события</label>
                   <input
+                    id={`${fieldId}-date`}
+                    name="eventDate"
                     type="date"
                     min={minEventDate}
                     value={formData.eventDate}
@@ -369,9 +387,11 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
                   />
                 </div>
                 <div>
-                  <label className={s.fieldLabel}>Примерный вес</label>
+                  <label htmlFor={`${fieldId}-weight`} className={s.fieldLabel}>Примерный вес</label>
                   <div className="relative">
                     <select
+                      id={`${fieldId}-weight`}
+                      name="weight"
                       value={formData.weight}
                       onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
                       className={`${s.input} appearance-none cursor-pointer pr-12 [&>option]:text-chocolate ${formData.weight ? "" : variant === "dark" ? "text-cream/50" : "text-muted-foreground"}`}
@@ -414,6 +434,8 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
         </div>
         <div>
           <textarea
+            name="comment"
+            aria-label="Комментарий к заказу"
             placeholder={commentPlaceholder}
             rows={3}
             maxLength={COMMENT_MAX_LENGTH}
