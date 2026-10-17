@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Архив сборки для загрузки на хостинг
+site.zip
