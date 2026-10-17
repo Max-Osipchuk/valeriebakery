@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Instagram, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { INSTAGRAM_URL } from "@/config";
 import { photos } from "@/data/photos";
 
 const galleryImages = [
@@ -77,6 +79,24 @@ const GallerySection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* More work in Instagram */}
+        <div className="mt-12 md:mt-16 flex flex-col items-center text-center">
+          <p className="font-serif text-2xl md:text-3xl text-chocolate mb-3">
+            Здесь только часть наших работ
+          </p>
+          <p className="text-muted-foreground max-w-xl mb-6">
+            Все новые торты, капкейки и бенто Валерия выкладывает в Instagram.
+            Подписывайтесь, чтобы первыми видеть свежие работы.
+          </p>
+          <Button asChild variant="heroPrimary" size="lg">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+              <Instagram />
+              Больше работ в Instagram
+            </a>
+          </Button>
+          <span className="mt-3 text-sm text-muted-foreground">@_valerie_bakery</span>
         </div>
       </div>
 
