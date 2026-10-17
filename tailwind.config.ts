@@ -62,10 +62,12 @@ export default {
         dustyPink: {
           DEFAULT: "hsl(var(--dusty-pink))",
           light: "hsl(var(--dusty-pink-light))",
+          deep: "hsl(var(--dusty-pink-deep))",
         },
         gold: {
           DEFAULT: "hsl(var(--gold))",
           light: "hsl(var(--gold-light))",
+          deep: "hsl(var(--gold-deep))",
         },
       },
       borderRadius: {

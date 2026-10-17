@@ -61,7 +61,7 @@ const Privacy = () => {
         <div className="container mx-auto flex items-center justify-between py-5">
           <a href="/" className="flex items-baseline gap-2">
             <span className="font-serif text-2xl md:text-3xl font-bold text-chocolate">Valerie</span>
-            <span className="font-serif text-xl md:text-2xl italic text-dustyPink">Bakery</span>
+            <span className="font-serif text-xl md:text-2xl italic text-dustyPink-deep">Bakery</span>
           </a>
           <Button asChild variant="heroPrimary" size="sm">
             <a href="/">Назад на главную</a>
@@ -71,7 +71,7 @@ const Privacy = () => {
 
       <main className="container mx-auto py-12 md:py-20">
         <div className="max-w-3xl">
-          <p className="mb-3 text-sm font-medium uppercase tracking-[0.16em] text-gold">Valerie Bakery</p>
+          <p className="mb-3 text-sm font-medium uppercase tracking-[0.16em] text-gold-deep">Valerie Bakery</p>
           <h1 className="mb-6 font-serif text-4xl md:text-6xl leading-tight text-chocolate">
             Политика конфиденциальности
           </h1>

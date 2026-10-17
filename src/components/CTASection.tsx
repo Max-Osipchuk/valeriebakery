@@ -16,7 +16,7 @@ const CTASection = () => {
           <div className="text-center lg:text-left min-w-0">
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream mb-6 break-words">
               Готовы заказать{" "}
-              <span className="italic text-gold">торт мечты?</span>
+              <span className="italic text-gold-light">торт мечты?</span>
             </h2>
             <p className="text-cream/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0 break-words">
               Оставьте заявку, и мы свяжемся с вами в течение часа для
@@ -33,7 +33,7 @@ const CTASection = () => {
                   <p className="text-cream/60 text-sm">Телефон</p>
                   <a
                     href="tel:+79819384324"
-                    className="text-cream font-medium hover:text-gold transition-colors"
+                    className="text-cream font-medium hover:text-gold-light transition-colors"
                   >
                     +7 (981) 938-43-24
                   </a>
@@ -72,7 +72,7 @@ const CTASection = () => {
                     href="https://www.instagram.com/_valerie_bakery"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-cream font-medium hover:text-gold transition-colors"
+                    className="text-cream font-medium hover:text-gold-light transition-colors"
                   >
                     @_valerie_bakery
                   </a>

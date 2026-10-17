@@ -33,6 +33,8 @@ const styles = {
     deliveryActive: "bg-gold text-chocolate border-gold",
     deliveryInactive: "bg-cream border-border text-chocolate-light hover:border-gold/50",
     privacy: "text-chocolate-light",
+    accent: "text-gold-deep",
+    accentHover: "hover:text-gold-deep",
     successTitle: "text-chocolate",
     successLine: "text-chocolate-light",
     successMuted: "text-muted-foreground",
@@ -52,10 +54,12 @@ const styles = {
     deliveryActive: "bg-gold text-chocolate border-gold",
     deliveryInactive: "bg-cream/10 border-cream/20 text-cream/70 hover:border-gold/50",
     privacy: "text-cream/60",
+    accent: "text-gold-light",
+    accentHover: "hover:text-gold-light",
     successTitle: "text-cream",
     successLine: "text-cream/90",
     successMuted: "text-cream/55",
-    successPanel: "bg-cream/10",
+    successPanel: "bg-chocolate/30",
     successStep: "text-cream/80",
     successPhone: "text-cream",
     successAgain: "text-cream/50",
@@ -207,24 +211,24 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
           Пн–Вс, 9:00–21:00
         </p>
         <div className={`rounded-2xl px-5 py-4 mb-6 text-left space-y-2 ${s.successPanel}`}>
-          <p className="text-xs font-medium text-gold uppercase tracking-wider mb-3">Что будет дальше</p>
+          <p className={`text-xs font-medium uppercase tracking-wider mb-3 ${s.accent}`}>Что будет дальше</p>
           <div className={`flex items-start gap-2 text-sm ${s.successStep}`}>
-            <span className="text-gold font-bold shrink-0">1.</span>
+            <span className={`font-bold shrink-0 ${s.accent}`}>1.</span>
             <span>Мы изучим заявку и подберём для вас варианты</span>
           </div>
           <div className={`flex items-start gap-2 text-sm ${s.successStep}`}>
-            <span className="text-gold font-bold shrink-0">2.</span>
+            <span className={`font-bold shrink-0 ${s.accent}`}>2.</span>
             <span>Позвоним или напишем, чтобы уточнить детали</span>
           </div>
           <div className={`flex items-start gap-2 text-sm ${s.successStep}`}>
-            <span className="text-gold font-bold shrink-0">3.</span>
+            <span className={`font-bold shrink-0 ${s.accent}`}>3.</span>
             <span>Согласуем дизайн, вкус и дату — и приступим к работе</span>
           </div>
         </div>
         <p className={`text-sm mb-1 ${s.successMuted}`}>Если срочно — звоните напрямую:</p>
         <a
           href="tel:+79819384324"
-          className={`text-lg font-semibold hover:text-gold transition-colors ${s.successPhone}`}
+          className={`text-lg font-semibold transition-colors ${s.accentHover} ${s.successPhone}`}
         >
           +7 (981) 938-43-24
         </a>
@@ -235,7 +239,7 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
               setShowDetails(false);
               setFormData(emptyFormData);
             }}
-            className={`text-sm hover:text-gold transition-colors underline underline-offset-2 ${s.successAgain}`}
+            className={`text-sm transition-colors underline underline-offset-2 ${s.accentHover} ${s.successAgain}`}
           >
             Оставить ещё одну заявку
           </button>
@@ -322,7 +326,7 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
           <button
             type="button"
             onClick={() => setShowDetails((open) => !open)}
-            className={`w-full flex items-center justify-between text-sm transition-colors hover:text-gold ${s.hint}`}
+            className={`w-full flex items-center justify-between text-sm transition-colors ${s.accentHover} ${s.hint}`}
           >
             <span className="truncate text-left">
               {detailsSummary
@@ -455,7 +459,7 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
           />
           <span>
             Я согласен(на) на обработку моих персональных данных в соответствии с{" "}
-            <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
+            <a href="/privacy" target="_blank" rel="noopener noreferrer" className={`hover:underline ${s.accent}`}>
               Политикой конфиденциальности
             </a>
           </span>

@@ -9,7 +9,7 @@ const Footer = () => {
             <span className="font-serif text-xl font-bold text-cream">
               Valerie
             </span>
-            <span className="font-serif text-lg italic text-dustyPink">
+            <span className="font-serif text-lg italic text-dustyPink-light">
               Bakery
             </span>
           </div>
@@ -19,14 +19,14 @@ const Footer = () => {
               href="https://www.instagram.com/_valerie_bakery"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-cream/70 hover:text-dustyPink transition-colors"
+              className="flex items-center gap-2 text-cream/70 hover:text-dustyPink-light transition-colors"
             >
               <Instagram className="w-5 h-5" />
               <span className="text-sm">@_valerie_bakery</span>
             </a>
             <a
               href="tel:+79819384324"
-              className="text-cream/70 hover:text-gold transition-colors text-sm"
+              className="text-cream/70 hover:text-gold-light transition-colors text-sm"
             >
               +7 (981) 938-43-24
             </a>

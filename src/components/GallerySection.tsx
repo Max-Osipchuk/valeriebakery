@@ -31,11 +31,11 @@ const GallerySection = () => {
     <section id="gallery" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <span className="inline-block text-gold font-medium tracking-wider uppercase text-sm mb-4">
+          <span className="inline-block text-gold-deep font-medium tracking-wider uppercase text-sm mb-4">
             Галерея
           </span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-chocolate mb-6">
-            Наши <span className="italic text-dustyPink">творения</span>
+            Наши <span className="italic text-dustyPink-deep">творения</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Каждый торт — это уникальное произведение кондитерского искусства
@@ -87,7 +87,7 @@ const GallerySection = () => {
           onClick={() => setSelectedImage(null)}
         >
           <button
-            className="absolute top-6 right-6 text-cream hover:text-gold transition-colors"
+            className="absolute top-6 right-6 text-cream hover:text-gold-light transition-colors"
             aria-label="Закрыть просмотр фото"
             onClick={() => setSelectedImage(null)}
           >

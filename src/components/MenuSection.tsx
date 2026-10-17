@@ -18,11 +18,11 @@ const MenuSection = () => {
     <section id="menu" className="py-20 md:py-32 bg-cream">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <span className="inline-block text-gold font-medium tracking-wider uppercase text-sm mb-4">
+          <span className="inline-block text-gold-deep font-medium tracking-wider uppercase text-sm mb-4">
             Наше меню
           </span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-chocolate mb-6">
-            Десерты для <span className="italic text-dustyPink">особых</span>{" "}
+            Десерты для <span className="italic text-dustyPink-deep">особых</span>{" "}
             моментов
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
@@ -106,7 +106,7 @@ const MenuSection = () => {
                           <span className="font-semibold text-chocolate">{flavor.name}</span>
                           <button
                             onClick={() => selectFlavor(flavor.name)}
-                            className="shrink-0 text-xs font-medium text-gold hover:text-chocolate transition-colors underline underline-offset-2"
+                            className="shrink-0 text-xs font-medium text-gold-deep hover:text-chocolate transition-colors underline underline-offset-2"
                           >
                             Заказать
                           </button>
