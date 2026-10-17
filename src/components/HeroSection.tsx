@@ -2,7 +2,7 @@ import { Sparkles, Heart, Palette, Send } from "lucide-react";
 import heroCake from "@/assets/hero-cake-white.jpg";
 import OrderForm from "@/components/OrderForm";
 import { Button } from "@/components/ui/button";
-import { TELEGRAM_URL } from "@/config";
+import { SHOW_TELEGRAM_BUTTON, TELEGRAM_URL } from "@/config";
 
 const HeroSection = () => {
   const features = [
@@ -34,17 +34,24 @@ const HeroSection = () => {
               1 750 ₽, большие торты — от 3 300 ₽.
             </p>
 
-            {/* Actions: на десктопе форма и так рядом, поэтому «Заказать» только до lg */}
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 mb-10">
+            {/* Actions: на десктопе форма и так рядом, поэтому «Заказать» только до lg.
+                Без кнопки Telegram ряд на десктопе пустой, прячем его целиком. */}
+            <div
+              className={`flex flex-col sm:flex-row justify-center lg:justify-start gap-3 mb-10 ${
+                SHOW_TELEGRAM_BUTTON ? "" : "lg:hidden"
+              }`}
+            >
               <Button asChild variant="hero" size="lg" className="lg:hidden">
                 <a href="#hero-order">Заказать торт</a>
               </Button>
-              <Button asChild variant="heroPrimary" size="lg">
-                <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
-                  <Send />
-                  Написать в Telegram
-                </a>
-              </Button>
+              {SHOW_TELEGRAM_BUTTON && (
+                <Button asChild variant="heroPrimary" size="lg">
+                  <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
+                    <Send />
+                    Написать в Telegram
+                  </a>
+                </Button>
+              )}
             </div>
 
             {/* Features */}
