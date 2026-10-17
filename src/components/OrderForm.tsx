@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown, Heart, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { normalizeOrderFormData, orderFieldLimits, validateOrderFormData } from "@/lib/orderValidation";
+import { getPhoneError, normalizeOrderFormData, orderFieldLimits, validateOrderFormData } from "@/lib/orderValidation";
 import PhoneInput from "@/components/PhoneInput";
 import { menuData, SELECT_FLAVOR_EVENT } from "@/data/menu";
 
@@ -118,8 +118,9 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
     return () => window.removeEventListener(SELECT_FLAVOR_EVENT, handleSelectFlavor);
   }, []);
 
+  const phoneError = getPhoneError(formData.phone);
   const isSubmitReady = Boolean(
-    formData.phone.trim() &&
+    !phoneError &&
       (formData.email.trim() || formData.social.trim()) &&
       formData.privacyConsent
   );
@@ -129,8 +130,8 @@ const OrderForm = ({ variant, submitLabel, commentPlaceholder, header }: OrderFo
     formData.comment || formData.privacyConsent
   );
   const submitHint = isTouched && !isSubmitReady
-    ? !formData.phone.trim()
-      ? "Укажите номер телефона"
+    ? phoneError
+      ? phoneError
       : !formData.email.trim() && !formData.social.trim()
       ? "Укажите email или Telegram"
       : "Подтвердите согласие с политикой конфиденциальности"
