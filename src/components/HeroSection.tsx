@@ -1,6 +1,8 @@
-import { Sparkles, Heart, Palette } from "lucide-react";
+import { Sparkles, Heart, Palette, Send } from "lucide-react";
 import heroCake from "@/assets/hero-cake-white.jpg";
 import OrderForm from "@/components/OrderForm";
+import { Button } from "@/components/ui/button";
+import { TELEGRAM_URL } from "@/config";
 
 const HeroSection = () => {
   const features = [
@@ -31,6 +33,19 @@ const HeroSection = () => {
               Торты и десерты на заказ в Санкт-Петербурге. Бенто-торты — от
               1 750 ₽, большие торты — от 3 300 ₽.
             </p>
+
+            {/* Actions: на десктопе форма и так рядом, поэтому «Заказать» только до lg */}
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 mb-10">
+              <Button asChild variant="hero" size="lg" className="lg:hidden">
+                <a href="#hero-order">Заказать торт</a>
+              </Button>
+              <Button asChild variant="heroPrimary" size="lg">
+                <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
+                  <Send />
+                  Написать в Telegram
+                </a>
+              </Button>
+            </div>
 
             {/* Features */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10">
@@ -66,7 +81,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right - Form */}
-          <div className="relative min-w-0">
+          <div id="hero-order" className="relative min-w-0 scroll-mt-24">
             <div className="bg-card/95 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-elevated border border-border/50 animate-scale-in">
               <OrderForm
                 variant="light"
