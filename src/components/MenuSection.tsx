@@ -2,6 +2,15 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { menuData, selectFlavor } from "@/data/menu";
 
+// 1 вкус, 2–4 вкуса, 5–20 вкусов, 21 вкус, 22 вкуса...
+const formatFlavorCount = (count: number) => {
+  const lastTwo = count % 100;
+  const last = count % 10;
+  if (last === 1 && lastTwo !== 11) return `${count} вкус`;
+  if (last >= 2 && last <= 4 && (lastTwo < 12 || lastTwo > 14)) return `${count} вкуса`;
+  return `${count} вкусов`;
+};
+
 const MenuSection = () => {
   const [expandedId, setExpandedId] = useState<string | null>("biscuit1");
 
@@ -73,7 +82,7 @@ const MenuSection = () => {
                 >
                   <span className="font-medium">
                     {category.flavors
-                      ? `${category.flavors.length} вкусов`
+                      ? formatFlavorCount(category.flavors.length)
                       : "Подробнее"}
                   </span>
                   <ChevronDown
