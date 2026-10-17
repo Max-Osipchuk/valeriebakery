@@ -25,12 +25,12 @@ const styles = {
   light: {
     input:
       "w-full px-5 py-4 bg-cream rounded-xl border border-border focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all duration-300 text-chocolate placeholder:text-muted-foreground",
-    colorScheme: "[color-scheme:light]",
+    colorScheme: "[color-scheme:light] dark:[color-scheme:dark]",
     hint: "text-sm text-muted-foreground",
     fieldLabel: "block text-sm text-muted-foreground mb-1.5",
     selectChevron: "text-muted-foreground",
     checkbox: "border-border",
-    deliveryActive: "bg-gold text-chocolate border-gold",
+    deliveryActive: "fixed-palette bg-gold text-chocolate border-gold",
     deliveryInactive: "bg-cream border-border text-chocolate-light hover:border-gold/50",
     privacy: "text-chocolate-light",
     accent: "text-gold-deep",

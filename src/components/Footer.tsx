@@ -2,7 +2,7 @@ import { Heart, Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="py-8 bg-chocolate-light border-t border-cream/10">
+    <footer className="fixed-palette py-8 bg-chocolate-light border-t border-cream/10">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">

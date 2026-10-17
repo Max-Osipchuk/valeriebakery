@@ -38,7 +38,7 @@ const MenuSection = () => {
               style={{ animationDelay: `${index * 0.08}s` }}
             >
               {/* Image */}
-              <div className="relative h-60 overflow-hidden">
+              <div className="fixed-palette relative h-60 overflow-hidden">
                 <img
                   src={category.image.src}
                   srcSet={category.image.srcSet}

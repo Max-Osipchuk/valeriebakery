@@ -49,7 +49,7 @@ const GallerySection = () => {
           {galleryImages.map((image, index) => (
             <div
               key={index}
-              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${image.span} animate-fade-up shadow-soft hover:shadow-elevated transition-shadow duration-500`}
+              className={`fixed-palette group relative overflow-hidden rounded-2xl cursor-pointer ${image.span} animate-fade-up shadow-soft hover:shadow-elevated transition-shadow duration-500`}
               style={{ animationDelay: `${index * 0.05}s` }}
               onClick={() => setSelectedImage(image.photo.src)}
             >
@@ -103,7 +103,7 @@ const GallerySection = () => {
       {/* Lightbox */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-chocolate/95 flex items-center justify-center p-4 animate-fade-in"
+          className="fixed-palette fixed inset-0 z-50 bg-chocolate/95 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setSelectedImage(null)}
         >
           <button

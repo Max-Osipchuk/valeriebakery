@@ -3,7 +3,7 @@ import OrderForm from "@/components/OrderForm";
 
 const CTASection = () => {
   return (
-    <section id="order" className="py-20 md:py-32 bg-chocolate relative overflow-hidden">
+    <section id="order" className="fixed-palette py-20 md:py-32 bg-chocolate relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-gold/10 blur-3xl" />

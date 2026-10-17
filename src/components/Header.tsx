@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -72,19 +73,23 @@ const Header = () => {
           ))}
         </nav>
 
-        <Button
-          variant="heroPrimary"
-          onClick={() => scrollToSection("order")}
-          className="shrink-0 px-5 font-medium"
-        >
-          Заказать
-        </Button>
+        {/* На телефоне переключатель темы в меню: в строке шапки ему не хватает места */}
+        <div className="flex shrink-0 items-center gap-2">
+          <ThemeToggle className="liquid-glass-panel hidden text-chocolate hover:bg-cream/80 hover:text-chocolate md:inline-flex" />
+          <Button
+            variant="heroPrimary"
+            onClick={() => scrollToSection("order")}
+            className="shrink-0 px-5 font-medium"
+          >
+            Заказать
+          </Button>
+        </div>
       </div>
 
       <div
         aria-hidden={!isMobileMenuOpen}
         className={`container mx-auto md:hidden overflow-hidden transition-all duration-300 ease-out ${
-          isMobileMenuOpen ? "max-h-56 opacity-100 pt-4" : "max-h-0 opacity-0 pt-0"
+          isMobileMenuOpen ? "max-h-72 opacity-100 pt-4" : "max-h-0 opacity-0 pt-0"
         }`}
       >
         <nav className="liquid-glass-panel rounded-lg p-2">
@@ -99,6 +104,11 @@ const Header = () => {
               {item.label}
             </Button>
           ))}
+          <ThemeToggle
+            withLabel
+            tabIndex={isMobileMenuOpen ? 0 : -1}
+            className="flex h-12 w-full justify-start rounded-md px-4 text-left font-medium text-chocolate-light transition-colors duration-300 hover:bg-gold/15 hover:text-chocolate"
+          />
         </nav>
       </div>
     </header>

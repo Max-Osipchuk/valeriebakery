@@ -13,8 +13,8 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen relative overflow-hidden bg-gradient-hero">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Background decorative elements: на тёмном фоне светлые круги дают серую дымку */}
+      <div className="absolute inset-0 overflow-hidden dark:opacity-30">
         <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] rounded-full bg-dustyPink-light/30 blur-3xl" />
         <div className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-gold-light/20 blur-3xl" />
       </div>
