@@ -31,7 +31,11 @@ const MenuSection = () => {
               {/* Image */}
               <div className="relative h-60 overflow-hidden">
                 <img
-                  src={category.image}
+                  src={category.image.src}
+                  srcSet={category.image.srcSet}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  width={category.image.width}
+                  height={category.image.height}
                   alt={category.title}
                   loading="lazy"
                   decoding="async"

@@ -1,10 +1,4 @@
-import gallery9 from "@/assets/gallery-9.jpg";
-import gallery11 from "@/assets/gallery-11.jpg";
-import gallery15 from "@/assets/gallery-15.jpg";
-import gallery16 from "@/assets/gallery-16.jpg";
-import gallery17 from "@/assets/gallery-17.jpg";
-import gallery18 from "@/assets/gallery-18.jpg";
-import gallery19 from "@/assets/gallery-19.jpg";
+import { photos, type Photo } from "@/data/photos";
 
 export interface FlavorItem {
   name: string;
@@ -21,7 +15,7 @@ export interface MenuCategory {
   title: string;
   price: string;
   minWeight?: string;
-  image: string;
+  image: Photo;
   flavors?: FlavorItem[];
   items?: PriceItem[];
   options?: { label: string; values: string[] }[];
@@ -33,7 +27,7 @@ export const menuData: MenuCategory[] = [
     title: "Тропические & Фруктовые",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
-    image: gallery15,
+    image: photos.gallery15,
     flavors: [
       { name: "Рафаэлло", description: "Кокосовые бисквиты и крем, начинка из малинового конфитюра" },
       { name: "Манго Маракуйя", description: "Кокосовые бисквиты, манговый крем и 2 начинки: маракуйевый конфитюр и манговый чизкейк" },
@@ -46,7 +40,7 @@ export const menuData: MenuCategory[] = [
     title: "Ореховые & Ягодные",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
-    image: gallery16,
+    image: photos.gallery16,
     flavors: [
       { name: "Миндаль банан", description: "Миндальные бисквиты и крем, начинка из карамелизированного банана" },
       { name: "Ягода малина", description: "Малиновые бисквиты и крем, начинка из малинового конфитюра, посыпанного маршмеллоу" },
@@ -59,7 +53,7 @@ export const menuData: MenuCategory[] = [
     title: "Шоколадные & Карамельные",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
-    image: gallery17,
+    image: photos.gallery17,
     flavors: [
       { name: "Сникерс", description: "Шоколадные бисквиты, ванильный крем и начинка из арахиса, политого солёной карамелью" },
       { name: "Морковный", description: "Морковные бисквиты, ванильный крем и 2 начинки из солёной карамели и ванильного чизкейка" },
@@ -72,7 +66,7 @@ export const menuData: MenuCategory[] = [
     title: "Сезонные торты",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
-    image: gallery9,
+    image: photos.gallery9,
     flavors: [
       { name: "Кленовая тыква", description: "Тыквенные бисквиты, кленовый крем и начинка из солёной карамели" },
       { name: "Арахисовый", description: "Арахисовые бисквиты и крем, начинка из арахиса, политого солёной карамелью" },
@@ -85,7 +79,7 @@ export const menuData: MenuCategory[] = [
     title: "Классические торты",
     price: "2 200₽/кг",
     minWeight: "от 1.5 кг",
-    image: gallery11,
+    image: photos.gallery11,
     flavors: [
       { name: "Медовик", description: "Медовые коржи и ванильно-сметанный крем" },
       { name: "Молочная девочка", description: "Бисквиты с добавлением сгущённого молока, ванильный крем и начинка из малинового конфитюра" },
@@ -95,7 +89,7 @@ export const menuData: MenuCategory[] = [
     id: "cupcakes",
     title: "Капкейки",
     price: "от 2 500₽",
-    image: gallery18,
+    image: photos.gallery18,
     items: [
       { name: "6 шт", price: "2 500₽" },
       { name: "10 шт", price: "3 600₽" },
@@ -118,7 +112,7 @@ export const menuData: MenuCategory[] = [
     id: "bento",
     title: "Бенто-торт",
     price: "1 750₽",
-    image: gallery19,
+    image: photos.gallery19,
     items: [{ name: "~500 гр", price: "1 750₽" }],
     options: [
       { label: "Бисквит", values: ["ваниль", "шоколад", "красный бархат", "миндаль", "мак", "кокос"] },

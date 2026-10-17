@@ -1,45 +1,27 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import gallery5 from "@/assets/gallery-5.jpg";
-import gallery6 from "@/assets/gallery-6.jpg";
-import gallery7 from "@/assets/gallery-7.jpg";
-import gallery8 from "@/assets/gallery-8.jpg";
-import gallery9 from "@/assets/gallery-9.jpg";
-import gallery10 from "@/assets/gallery-10.jpg";
-import gallery11 from "@/assets/gallery-11.jpg";
-import gallery12 from "@/assets/gallery-12.jpg";
-import gallery13 from "@/assets/gallery-13.jpg";
-import gallery14 from "@/assets/gallery-14.jpg";
-import gallery15 from "@/assets/gallery-15.jpg";
-import gallery16 from "@/assets/gallery-16.jpg";
-import gallery17 from "@/assets/gallery-17.jpg";
-import gallery18 from "@/assets/gallery-18.jpg";
-import gallery19 from "@/assets/gallery-19.jpg";
+import { photos } from "@/data/photos";
 
 const galleryImages = [
-  { src: gallery1, alt: "Торт на полгодика с зайкой", span: "col-span-1 row-span-1" },
-  { src: gallery2, alt: "Чёрный торт на 30-летие с золотым декором", span: "col-span-1 row-span-1" },
-  { src: gallery3, alt: "Торт с капкейками на день рождения", span: "col-span-2 row-span-1" },
-  { src: gallery4, alt: "Голубой торт с цветами", span: "col-span-1 row-span-1" },
-  { src: gallery5, alt: "Бенто-торт с динозаврами", span: "col-span-1 row-span-1" },
-  { src: gallery6, alt: "Двухъярусный торт для музыкальной студии", span: "col-span-2 row-span-1" },
-  { src: gallery7, alt: "Серый торт с горами — Ты покоришь любые вершины", span: "col-span-1 row-span-1" },
-  { src: gallery8, alt: "Торт с домиком и ягодами на юбилей", span: "col-span-1 row-span-1" },
-  { src: gallery9, alt: "Двухъярусный торт с сухоцветами", span: "col-span-2 row-span-1" },
-  { src: gallery10, alt: "Капкейки мятного и бежевого цвета в коробке", span: "col-span-1 row-span-1" },
-  { src: gallery11, alt: "Белый торт с клубникой и малиной", span: "col-span-1 row-span-1" },
-  { src: gallery12, alt: "Розовый торт с цветами и ягодами", span: "col-span-1 row-span-1" },
-  { src: gallery13, alt: "Чёрный торт с золотым львом", span: "col-span-1 row-span-1" },
-  { src: gallery14, alt: "Персиковый торт с розами и эвкалиптом", span: "col-span-2 row-span-1" },
+  { photo: photos.gallery1, alt: "Торт на полгодика с зайкой", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery2, alt: "Чёрный торт на 30-летие с золотым декором", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery3, alt: "Торт с капкейками на день рождения", span: "col-span-2 row-span-1" },
+  { photo: photos.gallery4, alt: "Голубой торт с цветами", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery5, alt: "Бенто-торт с динозаврами", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery6, alt: "Двухъярусный торт для музыкальной студии", span: "col-span-2 row-span-1" },
+  { photo: photos.gallery7, alt: "Серый торт с горами — Ты покоришь любые вершины", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery8, alt: "Торт с домиком и ягодами на юбилей", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery9, alt: "Двухъярусный торт с сухоцветами", span: "col-span-2 row-span-1" },
+  { photo: photos.gallery10, alt: "Капкейки мятного и бежевого цвета в коробке", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery11, alt: "Белый торт с клубникой и малиной", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery12, alt: "Розовый торт с цветами и ягодами", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery13, alt: "Чёрный торт с золотым львом", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery14, alt: "Персиковый торт с розами и эвкалиптом", span: "col-span-2 row-span-1" },
   
-  { src: gallery16, alt: "Белый торт с малиной и лавандой", span: "col-span-1 row-span-1" },
-  { src: gallery17, alt: "Фисташковый торт с ягодами", span: "col-span-2 row-span-1" },
-  { src: gallery18, alt: "Капкейки с мишками и погремушками", span: "col-span-1 row-span-1" },
-  { src: gallery19, alt: "Бенто-торт Happy Birthday с бантиками", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery16, alt: "Белый торт с малиной и лавандой", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery17, alt: "Фисташковый торт с ягодами", span: "col-span-2 row-span-1" },
+  { photo: photos.gallery18, alt: "Капкейки с мишками и погремушками", span: "col-span-1 row-span-1" },
+  { photo: photos.gallery19, alt: "Бенто-торт Happy Birthday с бантиками", span: "col-span-1 row-span-1" },
 ];
 
 const GallerySection = () => {
@@ -67,11 +49,15 @@ const GallerySection = () => {
               key={index}
               className={`group relative overflow-hidden rounded-2xl cursor-pointer ${image.span} animate-fade-up shadow-soft hover:shadow-elevated transition-shadow duration-500`}
               style={{ animationDelay: `${index * 0.05}s` }}
-              onClick={() => setSelectedImage(image.src)}
+              onClick={() => setSelectedImage(image.photo.src)}
             >
               <div className={`overflow-hidden ${image.span.includes("col-span-2") ? "aspect-square md:aspect-[2/1]" : "aspect-square"}`}>
                 <img
-                  src={image.src}
+                  src={image.photo.src}
+                  srcSet={image.photo.srcSet}
+                  sizes={image.span.includes("col-span-2") ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 50vw"}
+                  width={image.photo.width}
+                  height={image.photo.height}
                   alt={image.alt}
                   loading="lazy"
                   decoding="async"
